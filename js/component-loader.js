@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const hidePreloader = () => {
+    const preloader = document.getElementById("logo-preloader");
+    if (!preloader || preloader.classList.contains("logo-preloader--hidden")) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      preloader.classList.add("logo-preloader--hidden");
+      setTimeout(() => {
+        preloader.remove();
+      }, 400);
+    });
+  };
+
+  window.addEventListener("load", hidePreloader, { once: true });
+
   const loadComponents = (root = document) => {
     const containers = root.querySelectorAll('[data-component-src]');
 
@@ -42,6 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
           });
 
           loadComponents(container);
+          if (!document.querySelector('[data-component-src]')) {
+            setTimeout(hidePreloader, 0);
+          }
         })
         .catch((error) => {
           console.error(error);

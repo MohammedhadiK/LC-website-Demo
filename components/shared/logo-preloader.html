@@ -1,0 +1,51 @@
+<style>
+  .logo-preloader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    z-index: 9999;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .logo-preloader--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .logo-preloader__inner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.75rem;
+    border-radius: 9999px;
+    background: rgba(244, 183, 193, 0.35);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .logo-preloader__logo {
+    width: 120px;
+    max-width: 28vw;
+    animation: logoPulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes logoPulse {
+    0%,
+    100% {
+      transform: scale(0.94);
+      opacity: 0.85;
+    }
+
+    50% {
+      transform: scale(1.06);
+      opacity: 1;
+    }
+  }
+</style>
+<div id="logo-preloader" class="logo-preloader" role="presentation" aria-hidden="true">
+  <div class="logo-preloader__inner">
+    <img class="logo-preloader__logo" src="images/LC-Logo-02.png" alt=""/>
+  </div>
+</div>

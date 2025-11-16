@@ -1,0 +1,122 @@
+<script>
+  (() => {
+    const script = document.currentScript;
+    if (!script) return;
+    const container = script.parentElement;
+    if (!container || !container.hasAttribute('data-meta-component')) return;
+
+    const data = container.dataset || {};
+    const documentTitle = document.title || 'Listening Community';
+
+    const defaults = {
+      title: data.metaTitle || documentTitle,
+      description:
+        data.metaDescription ||
+        'Listening Community fosters compassionate listening circles, helplines, and trainings across communities.',
+      url: data.metaUrl || window.location.href,
+      image: data.metaImage || 'images/LC-Logo-02.png',
+      type: data.metaType || 'website',
+      siteName: data.metaSiteName || 'Listening Community',
+      twitterCard: data.twitterCard || 'summary_large_image'
+    };
+
+    const toAbsoluteUrl = (value) => {
+      if (!value) return value;
+      try {
+        return new URL(value, window.location.href).href;
+      } catch (error) {
+        console.warn('Unable to resolve URL for meta tag', value, error);
+        return value;
+      }
+    };
+
+    defaults.url = toAbsoluteUrl(defaults.url);
+    defaults.image = toAbsoluteUrl(defaults.image);
+
+    const head = document.head;
+    if (!head) return;
+
+    const upsert = (tagName, key, attributes) => {
+      let element = head.querySelector(`${tagName}[data-meta-key="${key}"]`);
+
+      if (!element) {
+        element = document.createElement(tagName);
+        element.setAttribute('data-meta-key', key);
+        element.setAttribute('data-managed-by', 'lc-meta');
+        head.appendChild(element);
+      }
+
+      Object.entries(attributes).forEach(([attr, value]) => {
+        if (value === undefined || value === null || value === '') {
+          element.removeAttribute(attr);
+        } else {
+          element.setAttribute(attr, value);
+        }
+      });
+
+      return element;
+    };
+
+    upsert('meta', 'description', {
+      name: 'description',
+      content: defaults.description
+    });
+
+    upsert('meta', 'og:title', {
+      property: 'og:title',
+      content: defaults.title
+    });
+
+    upsert('meta', 'og:description', {
+      property: 'og:description',
+      content: defaults.description
+    });
+
+    upsert('meta', 'og:image', {
+      property: 'og:image',
+      content: defaults.image
+    });
+
+    upsert('meta', 'og:url', {
+      property: 'og:url',
+      content: defaults.url
+    });
+
+    upsert('meta', 'og:type', {
+      property: 'og:type',
+      content: defaults.type
+    });
+
+    upsert('meta', 'og:site_name', {
+      property: 'og:site_name',
+      content: defaults.siteName
+    });
+
+    upsert('meta', 'twitter:card', {
+      name: 'twitter:card',
+      content: defaults.twitterCard
+    });
+
+    upsert('meta', 'twitter:title', {
+      name: 'twitter:title',
+      content: defaults.title
+    });
+
+    upsert('meta', 'twitter:description', {
+      name: 'twitter:description',
+      content: defaults.description
+    });
+
+    upsert('meta', 'twitter:image', {
+      name: 'twitter:image',
+      content: defaults.image
+    });
+
+    upsert('link', 'canonical', {
+      rel: 'canonical',
+      href: defaults.url
+    });
+
+    container.remove();
+  })();
+</script>

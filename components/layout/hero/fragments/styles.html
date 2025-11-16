@@ -261,14 +261,6 @@
   }
 
   @media (max-width: 1023px) {
-    .hero-nav-card {
-      padding: 0.5rem 0;
-    }
-
-    .hero-brand img {
-      height: 3rem;
-    }
-
     .hero-banner {
       min-height: auto;
     }
@@ -278,16 +270,21 @@
     }
 
     .hero-nav-card {
-      padding: 0.5rem 1.25rem;
+      padding: 0.75rem 1.5rem;
       gap: 1rem;
     }
 
-    .hero-brand img {
-      height: 2.1rem;
+    .hero-brand {
+      flex: 1 1 auto;
+      gap: 0.9rem;
     }
 
-    .hero-brand {
-      gap: 0.75rem;
+    .hero-brand img {
+      height: 3.25rem;
+    }
+
+    .hero-actions {
+      margin-left: auto;
     }
 
     .hero-links {
@@ -296,10 +293,6 @@
 
     .hero-contact {
       display: none;
-    }
-
-    .hero-contact {
-      padding: 0.55rem 1.4rem;
     }
 
     .hero-menu {
