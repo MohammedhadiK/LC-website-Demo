@@ -42,34 +42,42 @@
   </div>
   <script>
     (() => {
-      const script = document.currentScript;
-      if (!script) return;
-      const menuRoot = script.closest('.fixed.inset-0');
-      if (!menuRoot) return;
+      const rerun = () => {
+        const script = document.currentScript;
+        if (!script) return;
+        const menuRoot = script.closest('.fixed.inset-0');
+        if (!menuRoot) return;
 
-      const active = (document.body.dataset.activePage || '').trim();
-      if (!active) return;
+        const active = (document.body.dataset.activePage || '').trim();
+        if (!active) return;
 
-      const normalize = (href) => {
-        if (!href) return '';
-        let value = href.toLowerCase().split('?')[0].split('#')[0];
-        value = value.replace('.html', '');
-        if (!value || value === 'index') {
-          value = 'home';
-        }
-        return value;
+        const normalize = (href) => {
+          if (!href) return '';
+          let value = href.toLowerCase().split('?')[0].split('#')[0];
+          value = value.replace('.html', '');
+          if (!value || value === 'index') {
+            value = 'home';
+          }
+          return value;
+        };
+
+        const links = menuRoot.querySelectorAll('nav a[href]');
+        links.forEach((link) => {
+          const href = normalize(link.getAttribute('href'));
+          console.log('[mobile-menu] evaluating link', link.getAttribute('href'), 'normalized to', href);
+          if (href === active) {
+            const wrapper = link.parentElement;
+            console.log('[mobile-menu] removing active link for page', active);
+            (wrapper || link).remove();
+          }
+        });
+
+        console.log('[mobile-menu] active page:', active);
       };
 
-      const links = menuRoot.querySelectorAll('nav a[href]');
-      links.forEach((link) => {
-        const href = normalize(link.getAttribute('href'));
-        if (href === active) {
-          const wrapper = link.parentElement;
-          (wrapper || link).remove();
-        }
-      });
+      rerun();
 
-      console.log('[mobile-menu] active page:', active);
+      document.addEventListener('hero:active-page', rerun);
     })();
   </script>
 </div>

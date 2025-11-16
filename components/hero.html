@@ -36,9 +36,12 @@
 
         const activePage = (dataset.bannerActivePage || '').toLowerCase();
         if (activePage) {
+          console.log('[hero] active page from dataset:', activePage);
           navLinks.forEach((link) => {
             const href = (link.getAttribute('href') || '').toLowerCase();
             const normalized = href.replace('.html', '').replace('index', 'home');
+
+            console.log('[hero] evaluating link', href, 'normalized to', normalized);
 
             if (normalized === activePage) {
               link.setAttribute('aria-current', 'page');
@@ -49,6 +52,10 @@
 
           section.dataset.activePage = activePage;
           document.body.dataset.activePage = activePage;
+          console.log('[hero] body dataset activePage set to', document.body.dataset.activePage);
+          document.dispatchEvent(new CustomEvent('hero:active-page', {
+            detail: { activePage }
+          }));
         }
 
         if (dataset.bannerTitle) {
