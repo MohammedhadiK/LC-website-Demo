@@ -1,7 +1,7 @@
 <!-- Mobile Menu -->
 <div class="fixed inset-0 z-50 flex justify-end" x-show="mobileNavOpen" x-cloak>
   <div class="fixed inset-0 bg-black/40" x-on:click="mobileNavOpen = false"></div>
-  <div class="relative w-full xs:w-5/6 xs:max-w-md h-full bg-white shadow-2xl overflow-y-auto">
+  <div class="relative w-full xs:w-5/6 xs:max-w-md h-screen max-h-screen bg-white shadow-2xl overflow-y-auto">
     <div class="p-6 h-full flex flex-col">
       <!-- Header -->
       <div class="flex items-center justify-between mb-10">
@@ -42,4 +42,38 @@
       </div>
     </div>
   </div>
+  <script>
+    (() => {
+      const script = document.currentScript;
+      if (!script) return;
+      const container = script.closest('.fixed.inset-0.z-50');
+      if (!container) return;
+
+      const segments = (window.location.pathname || '').split('/');
+      let page = segments.pop() || '';
+      if (!page) {
+        page = 'index.html';
+      }
+
+      page = page.toLowerCase().split('?')[0].split('#')[0].replace('.html', '');
+      if (!page || page === 'index') {
+        page = 'home';
+      }
+
+      const navLinks = container.querySelectorAll('nav a[href]');
+      navLinks.forEach((link) => {
+        let href = (link.getAttribute('href') || '').toLowerCase();
+        if (!href || href.startsWith('http')) return;
+
+        href = href.split('?')[0].split('#')[0].replace('.html', '');
+        if (!href || href === 'index') {
+          href = 'home';
+        }
+
+        if (href === page) {
+          link.remove();
+        }
+      });
+    })();
+  </script>
 </div>
