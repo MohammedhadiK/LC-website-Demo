@@ -7,10 +7,16 @@
       scroll-snap-type: x proximity;
       cursor: grab;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
 
     .quote-gallery-marquee.is-dragging {
       cursor: grabbing;
+    }
+
+    .quote-gallery-marquee::-webkit-scrollbar {
+      display: none;
     }
 
     .quote-gallery-track {

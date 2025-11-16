@@ -1,7 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const hidePreloader = () => {
+  const isPreloaderDisabled = () => window.LC_DISABLE_PRELOADER === true || document.documentElement.hasAttribute("data-disable-preloader");
+  const PRELOADER_HIDE_DELAY_MS = 2000;
+
+  const hidePreloader = (forceRemove = false) => {
     const preloader = document.getElementById("logo-preloader");
-    if (!preloader || preloader.classList.contains("logo-preloader--hidden")) {
+    if (!preloader) {
+      return;
+    }
+
+    if (forceRemove || isPreloaderDisabled()) {
+      preloader.remove();
+      return;
+    }
+
+    if (preloader.classList.contains("logo-preloader--hidden")) {
       return;
     }
 
@@ -13,7 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  window.addEventListener("load", hidePreloader, { once: true });
+  const scheduleHidePreloader = (withDelay = true) => {
+    if (isPreloaderDisabled()) {
+      hidePreloader(true);
+      return;
+    }
+
+    const delay = withDelay ? PRELOADER_HIDE_DELAY_MS : 0;
+    setTimeout(() => hidePreloader(false), delay);
+  };
+
+  window.addEventListener("load", () => scheduleHidePreloader(true), { once: true });
 
   const loadComponents = (root = document) => {
     const containers = root.querySelectorAll('[data-component-src]');
@@ -59,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           loadComponents(container);
           if (!document.querySelector('[data-component-src]')) {
-            setTimeout(hidePreloader, 0);
+            scheduleHidePreloader(true);
           }
         })
         .catch((error) => {
@@ -69,4 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   loadComponents();
+  if (isPreloaderDisabled()) {
+    hidePreloader(true);
+  }
 });
