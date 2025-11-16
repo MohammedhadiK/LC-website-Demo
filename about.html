@@ -9,13 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer="defer"></script>
   </head>
   <body class="antialiased bg-body text-body font-body">
-    <div
-      data-component-src="components/shared/meta-tags.html"
-      data-meta-component
-      data-meta-title="Listening Community — About"
-      data-meta-description="Discover the Listening Community team and the empathy-first practices powering our circles and support."
-      data-meta-image="images/LC-wf.jpg"
-    ></div>
+    <div data-component-src="components/shared/logo-preloader.html"></div>
     <div id="app">
       <div
         data-component-src="components/layout/hero/hero.html"
@@ -24,10 +18,12 @@
         data-banner-description="Discover the people, practices, and partners making empathy a daily habit across our communities."
         data-banner-cta-text="Meet the team"
         data-banner-cta-link="#about-overview"
+        data-banner-hide-cta="true"
         data-banner-align="center"
         data-banner-max-width="640px"
       ></div>
       <div data-component-src="components/pages/about/about-overview.html"></div>
+      <div data-component-src="components/shared/quote-hero.html"></div>
       <div data-component-src="components/shared/quote-gallery.html"></div>
       <div data-component-src="components/shared/cta.html"></div>
       <!-- <div data-component-src="components/unused/foundation-overview.html"></div> -->

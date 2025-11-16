@@ -14,6 +14,7 @@
       const container = section.parentElement;
       if (!container) return;
       const dataset = container.dataset || {};
+      const hideCta = Object.prototype.hasOwnProperty.call(dataset, 'bannerHideCta') && dataset.bannerHideCta !== 'false';
 
       const syncHero = () => {
         const navLinks = section.querySelectorAll('.hero-links a');
@@ -56,14 +57,24 @@
         }
 
         if (ctaEl) {
-          if (dataset.bannerCtaText) {
-            ctaEl.textContent = dataset.bannerCtaText;
-          }
-          if (dataset.bannerCtaLink) {
-            ctaEl.setAttribute('href', dataset.bannerCtaLink);
-          }
-          if (dataset.bannerCtaTarget) {
-            ctaEl.setAttribute('target', dataset.bannerCtaTarget);
+          if (hideCta) {
+            ctaEl.style.display = 'none';
+            ctaEl.setAttribute('aria-hidden', 'true');
+            ctaEl.setAttribute('tabindex', '-1');
+          } else {
+            ctaEl.style.display = '';
+            ctaEl.removeAttribute('aria-hidden');
+            ctaEl.removeAttribute('tabindex');
+
+            if (dataset.bannerCtaText) {
+              ctaEl.textContent = dataset.bannerCtaText;
+            }
+            if (dataset.bannerCtaLink) {
+              ctaEl.setAttribute('href', dataset.bannerCtaLink);
+            }
+            if (dataset.bannerCtaTarget) {
+              ctaEl.setAttribute('target', dataset.bannerCtaTarget);
+            }
           }
         }
 

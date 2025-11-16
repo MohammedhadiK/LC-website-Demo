@@ -2,19 +2,27 @@
   <style>
     .quote-gallery-marquee {
       position: relative;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .quote-gallery-marquee.is-dragging {
+      cursor: grabbing;
     }
 
     .quote-gallery-track {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 1.5rem;
-      animation: quote-gallery-scroll 35s linear infinite;
-      will-change: transform;
+      min-width: max-content;
     }
 
     .quote-gallery-item {
       flex: 0 0 auto;
+      scroll-snap-align: center;
       width: clamp(160px, 20vw, 220px);
       height: clamp(160px, 20vw, 220px);
       border-radius: 1.25rem;
@@ -38,15 +46,6 @@
       transform: scale(1.05);
     }
 
-    @keyframes quote-gallery-scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
     @media (hover: none) {
       .quote-gallery-item {
         transition: none;
@@ -58,11 +57,7 @@
     }
   </style>
   <div class="container mx-auto px-4">
-    <div class="max-w-6xl mx-auto mb-24 text-center">
-      <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl tracking-sm mb-16">“The first duty of love is to listen.” — Paul Tillich</h1>
-      <a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border border-white/60 hover:border-white bg-[#800020] hover:bg-[#a00028] rounded-full transition duration-200" href="https://wa.me/918606966000?text=Hi%2C%20I%27m%20reaching%20out%20from%20the%20Listening%20Community%20website.%20I%27d%20love%20to%20connect%20with%20you." target="_blank" rel="noopener">Get In Touch</a>
-    </div>
-    <div class="quote-gallery-marquee">
+    <div class="quote-gallery-marquee" data-quote-gallery>
       <div class="quote-gallery-track">
         <div class="quote-gallery-item" tabindex="0">
           <img class="quote-gallery-image" src="images/Photos/images (1).webp" alt="Smiling volunteers offering support"/>
@@ -103,4 +98,81 @@
       </div>
     </div>
   </div>
+  <script>
+    (() => {
+      const container = document.currentScript?.previousElementSibling?.querySelector('[data-quote-gallery]');
+      if (!container) return;
+
+      const track = container.querySelector('.quote-gallery-track');
+      if (!track) return;
+
+      let isDown = false;
+      let isPaused = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let resumeTimeout;
+
+      const pauseAutoScroll = () => {
+        isPaused = true;
+        clearTimeout(resumeTimeout);
+        resumeTimeout = setTimeout(() => {
+          isPaused = false;
+        }, 2000);
+      };
+
+      container.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        container.classList.add('is-dragging');
+        container.setPointerCapture(e.pointerId);
+        startX = e.clientX;
+        scrollLeft = container.scrollLeft;
+        pauseAutoScroll();
+      });
+
+      container.addEventListener('pointerleave', () => {
+        if (!isDown) return;
+        isDown = false;
+        container.classList.remove('is-dragging');
+      });
+
+      container.addEventListener('pointerup', (e) => {
+        if (container.hasPointerCapture(e.pointerId)) {
+          container.releasePointerCapture(e.pointerId);
+        }
+        isDown = false;
+        container.classList.remove('is-dragging');
+        pauseAutoScroll();
+      });
+
+      container.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const walk = (e.clientX - startX) * 1.5;
+        container.scrollLeft = scrollLeft - walk;
+      });
+
+      container.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+          return;
+        }
+        container.scrollBy({ left: e.deltaY, behavior: 'smooth' });
+        pauseAutoScroll();
+        e.preventDefault();
+      }, { passive: false });
+
+      const AUTO_SPEED = 0.5;
+
+      const autoScroll = () => {
+        if (!isDown && !isPaused) {
+          container.scrollLeft += AUTO_SPEED;
+          if (container.scrollLeft >= track.scrollWidth - container.clientWidth) {
+            container.scrollLeft = 0;
+          }
+        }
+        requestAnimationFrame(autoScroll);
+      };
+
+      requestAnimationFrame(autoScroll);
+    })();
+  </script>
 </section>
