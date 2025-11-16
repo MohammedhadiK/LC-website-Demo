@@ -1,0 +1,243 @@
+<section class="programs-overview" id="programs-grid">
+  <style>
+    .programs-overview {
+      padding: clamp(3rem, 7vw, 5.5rem) 0;
+      background: #FFFFFF;
+    }
+
+    .programs-overview .section-header {
+      text-align: center;
+      max-width: 56rem;
+      margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+    }
+
+    .programs-overview .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      background: rgba(9, 80, 76, 0.08);
+      color: #0F5550;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    .programs-overview h2 {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      line-height: 1.15;
+      color: #12352F;
+      margin-top: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .programs-overview p {
+      color: #4B5B58;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .programs-overview .grid {
+      display: grid;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .programs-overview .card {
+      position: relative;
+      height: 100%;
+      padding: clamp(1.8rem, 4vw, 2.4rem);
+      border-radius: clamp(1.5rem, 3vw, 2rem);
+      background: #FFFFFF;
+      border: 1px solid rgba(17, 70, 59, 0.08);
+      box-shadow: 0 18px 50px rgba(26, 43, 38, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .programs-overview .card:nth-child(1),
+    .programs-overview .card:nth-child(4) {
+      background: linear-gradient(145deg, rgba(207, 237, 229, 0.45), #FFFFFF 65%);
+      border-color: rgba(28, 83, 71, 0.14);
+    }
+
+    .programs-overview .badge-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #0F5550;
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .programs-overview h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #12352F;
+    }
+
+    .programs-overview ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.6rem;
+      color: #4B5B58;
+      font-size: 0.95rem;
+    }
+
+    .programs-overview .cta-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #0F5550;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+
+    .programs-overview .cta-link:hover {
+      gap: 0.65rem;
+    }
+  </style>
+  <div class="container mx-auto px-4">
+    <div class="section-header">
+      <span class="eyebrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6" cy="6" r="6" fill="currentColor"/>
+        </svg>
+        Core programs
+      </span>
+      <h2>Every offering deepens trust, care, and connection</h2>
+      <p>
+        Choose from six program streams crafted for different contexts — crisis support, peer communities,
+        professional training, and institutional partnerships. We co-design implementation plans and provide
+        continuous accompaniment.
+      </p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <span class="badge-number">01</span>
+        <div>
+          <h3>Listening Helpline</h3>
+          <p>24/7 multilingual helpline and chat, anchored by trained volunteer listeners.</p>
+        </div>
+        <ul>
+          <li>• Emotional first-aid and crisis de-escalation</li>
+          <li>• Referral pathways with mental health partners</li>
+          <li>• Safety protocols and follow-up care</li>
+        </ul>
+        <a class="cta-link" href="mailto:listeningcommunity@gmail.com?subject=Listening%20Helpline%20Collaboration">
+          Enquire about the helpline
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 3L13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+      <article class="card">
+        <span class="badge-number">02</span>
+        <div>
+          <h3>Listening Circles</h3>
+          <p>Facilitated spaces for collective reflection across campuses, companies, and communities.</p>
+        </div>
+        <ul>
+          <li>• Circle anchors trained by LC facilitators</li>
+          <li>• Themes co-created with participants</li>
+          <li>• Integration of art, ritual, and peer mentoring</li>
+        </ul>
+        <a class="cta-link" href="mailto:listeningcommunity@gmail.com?subject=Listening%20Circles%20Facilitation">
+          Host a listening circle
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 3L13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+      <article class="card">
+        <span class="badge-number">03</span>
+        <div>
+          <h3>Listening Labs</h3>
+          <p>Immersive trainings that embed empathic communication across organisations.</p>
+        </div>
+        <ul>
+          <li>• Custom modules for diverse sectors</li>
+          <li>• Applied practice and scenario simulations</li>
+          <li>• Mentored implementation support</li>
+        </ul>
+        <a class="cta-link" href="mailto:listeningcommunity@gmail.com?subject=Listening%20Labs%20Training">
+          Design a learning lab
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 3L13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+      <article class="card">
+        <span class="badge-number">04</span>
+        <div>
+          <h3>Campus Listening Clubs</h3>
+          <p>Student-led ecosystems of support with monthly circles, campaigns, and peer mentors.</p>
+        </div>
+        <ul>
+          <li>• Starter playbooks & facilitator kits</li>
+          <li>• Leadership labs for club anchors</li>
+          <li>• Community platform for cross-campus learning</li>
+        </ul>
+        <a class="cta-link" href="mailto:listeningcommunity@gmail.com?subject=Campus%20Listening%20Clubs">
+          Launch a campus club
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 3L13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+      <article class="card">
+        <span class="badge-number">05</span>
+        <div>
+          <h3>Community Listening Hubs</h3>
+          <p>Neighbourhood pop-ups co-created with grassroots partners for hyperlocal care.</p>
+        </div>
+        <ul>
+          <li>• Co-designed with community hosts</li>
+          <li>• Multilingual listener roster</li>
+          <li>• Impact insights shared back to stakeholders</li>
+        </ul>
+        <a class="cta-link" href="mailto:listeningcommunity@gmail.com?subject=Listening%20Hubs">
+          Bring hubs to your city
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 3L13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+      <article class="card">
+        <span class="badge-number">06</span>
+        <div>
+          <h3>Emerging Listener Fellowship</h3>
+          <p>Six-month pathway blending training, practice, and community leadership journeys.</p>
+        </div>
+        <ul>
+          <li>• 120 hours of experiential learning</li>
+          <li>• Peer cohorts and reflective practice</li>
+          <li>• Capstone project with LC mentorship</li>
+        </ul>
+        <a class="cta-link" href="mailto:listeningcommunity@gmail.com?subject=Emerging%20Listener%20Fellowship">
+          Apply for the fellowship
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 3L13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>

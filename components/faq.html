@@ -1,0 +1,136 @@
+<section class="py-12 lg:py-24">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-20">
+      <h1 class="font-heading text-6xl mb-6">FAQ</h1>
+      <p class="text-gray-700">Here you will find the answers to the frequently asked questions.</p>
+    </div>
+    <div class="max-w-4xl mx-auto">
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
+        <div>
+          <div class="pr-5">
+            <h5 class="text-lg font-medium">What is Listening Community?</h5>
+          </div>
+          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+            <p class="text-gray-700 mt-4">Listening Community (LC) is a non-profit network of trained listeners, mental health advocates, and community partners dedicated to creating safe spaces where every person feels heard, valued, and supported.</p>
+          </div>
+        </div>
+        <span class="flex-shrink-0">
+          <div :class="{'hidden': accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="hidden" :class="{'hidden': !accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </span>
+      </button>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
+        <div>
+          <div class="pr-5">
+            <h5 class="text-lg font-medium">How does the Listening Helpline support callers?</h5>
+          </div>
+          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+            <p class="text-gray-700 mt-4">Our helpline connects callers with compassionate volunteers who offer non-judgmental listening, emotional validation, and crisis support. When needed, we guide individuals toward professional resources and follow-up care.</p>
+          </div>
+        </div>
+        <span class="flex-shrink-0">
+          <div :class="{'hidden': accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="hidden" :class="{'hidden': !accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </span>
+      </button>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
+        <div>
+          <div class="pr-5">
+            <h5 class="text-lg font-medium">Who can join a Listening Circle?</h5>
+          </div>
+          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+            <p class="text-gray-700 mt-4">Listening Circles are open to anyone seeking connection, reflection, or mutual support. Guided facilitators ensure the circles are inclusive, confidential, and grounded in empathy for participants from all backgrounds.</p>
+          </div>
+        </div>
+        <span class="flex-shrink-0">
+          <div :class="{'hidden': accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="hidden" :class="{'hidden': !accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </span>
+      </button>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
+        <div>
+          <div class="pr-5">
+            <h5 class="text-lg font-medium">How can I become a volunteer listener?</h5>
+          </div>
+          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+            <p class="text-gray-700 mt-4">Start by completing our Listening Skills Training, which covers active listening, crisis response, and self-care. After training, volunteers join supervised practice sessions before supporting callers or circles.</p>
+          </div>
+        </div>
+        <span class="flex-shrink-0">
+          <div :class="{'hidden': accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="hidden" :class="{'hidden': !accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </span>
+      </button>
+      <button class="flex w-full py-6 px-8 mb-24 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
+        <div>
+          <div class="pr-5">
+            <h5 class="text-lg font-medium">How can organisations collaborate with LC?</h5>
+          </div>
+          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+            <p class="text-gray-700 mt-4">We partner with schools, colleges, workplaces, and community groups to host awareness talks, set up Listening Clubs, and deliver customised workshops. Reach out to explore programmes tailored to your community.</p>
+          </div>
+        </div>
+        <span class="flex-shrink-0">
+          <div :class="{'hidden': accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="hidden" :class="{'hidden': !accordion}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </span>
+      </button>
+      <div class="sm:flex py-10 px-5 sm:px-10 bg-orange-50 rounded-2xl">
+        <div class="mb-4 sm:mb-0 sm:mr-6">
+          <h3 class="text-3xl font-medium text-teal-900">About Us</h3>
+        </div>
+        <div>
+          <h5 class="text-xl font-medium mb-4">A community built on care, empathy, and listening.</h5>
+          <p class="text-gray-700 mb-4"><span class="block font-medium text-teal-900">Who We Are</span>Listening Community (LC) is a non-profit initiative dedicated to active listening and suicide prevention. We believe that healing begins when every person feels heard, understood, and supported.</p>
+          <p class="text-gray-700 mb-4"><span class="block font-medium text-teal-900">Our Belief</span>At LC, we believe that every voice matters — and that listening can save lives. By fostering compassion and connection, we aim to build a community where no one is left unheard.</p>
+          <p class="text-gray-700"><span class="block font-medium text-teal-900">What We Do</span>Our initiatives include a Listening Helpline, Listening Circles, awareness programs, and skill-building workshops that empower people to listen with empathy and support one another. We also engage in advocacy, training, and collaborations to strengthen community-based mental health care.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

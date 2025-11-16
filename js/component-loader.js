@@ -1,0 +1,45 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const loadComponents = (root = document) => {
+    const containers = root.querySelectorAll('[data-component-src]');
+
+    containers.forEach((container) => {
+      const src = container.getAttribute("data-component-src");
+
+      fetch(src)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to load component: ${src}`);
+          }
+          return response.text();
+        })
+        .then((html) => {
+          container.innerHTML = html;
+          container.removeAttribute("data-component-src");
+
+          const scripts = container.querySelectorAll("script");
+          scripts.forEach((oldScript) => {
+            const newScript = document.createElement("script");
+
+            Array.from(oldScript.attributes).forEach((attr) => {
+              newScript.setAttribute(attr.name, attr.value);
+            });
+
+            if (oldScript.src) {
+              newScript.src = oldScript.src;
+            } else {
+              newScript.textContent = oldScript.textContent;
+            }
+
+            oldScript.replaceWith(newScript);
+          });
+
+          loadComponents(container);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  };
+
+  loadComponents();
+});
