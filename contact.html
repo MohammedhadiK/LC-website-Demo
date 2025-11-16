@@ -4,13 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="css/tailwind/tailwind.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-pO12rBkXgPmmZsjJ7VKByQVnu3TrgL2TGibQV1lyRvYdCa01nzn8/dxBQlDMz/PpLCG6qbsdvW9/M6+VugFQxw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="icon" type="image/png" sizes="32x32" href="images/LC-Logo-02.png" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer="defer"></script>
   </head>
   <body class="antialiased bg-body text-body font-body">
     <div id="app">
       <div
-        data-component-src="components/hero.html"
+        data-component-src="components/layout/hero/hero.html"
         data-banner-active-page="contact"
         data-banner-title="We’re ready to listen"
         data-banner-description="Reach out to Listening Community for helpline support, partnerships, or to host a circle in your community."
@@ -19,9 +26,9 @@
         data-banner-align="center"
         data-banner-max-width="640px"
       ></div>
-      <div data-component-src="components/contact-main.html"></div>
-      <div data-component-src="components/cta.html"></div>
-      <div data-component-src="components/footer.html"></div>
+      <div data-component-src="components/pages/contact/contact-main.html"></div>
+      <div data-component-src="components/shared/cta.html"></div>
+      <div data-component-src="components/shared/footer.html"></div>
     </div>
     <script src="js/component-loader.js"></script>
   </body>

@@ -1,11 +1,10 @@
 <section class="hero-banner relative overflow-hidden" x-data="{ mobileNavOpen: false }">
-  <div data-component-src="components/hero/styles.html"></div>
+  <div data-component-src="components/layout/hero/fragments/styles.html"></div>
   <div class="hero-bg" aria-hidden="true">
     <img src="bg-wbanner.png" alt="Listening Community banner background" data-hero-bg/>
   </div>
-  <div data-component-src="components/hero/nav.html"></div>
-  <div data-component-src="components/hero/content.html"></div>
-  <div data-component-src="components/mobile-menu.html"></div>
+  <div data-component-src="components/layout/hero/fragments/nav.html"></div>
+  <div data-component-src="components/layout/hero/fragments/content.html"></div>
   <script>
     (() => {
       const script = document.currentScript;
@@ -15,11 +14,6 @@
       const container = section.parentElement;
       if (!container) return;
       const dataset = container.dataset || {};
-
-      if (dataset.bannerHideHero === 'true') {
-        section.remove();
-        return;
-      }
 
       const syncHero = () => {
         const navLinks = section.querySelectorAll('.hero-links a');
@@ -36,12 +30,9 @@
 
         const activePage = (dataset.bannerActivePage || '').toLowerCase();
         if (activePage) {
-          console.log('[hero] active page from dataset:', activePage);
           navLinks.forEach((link) => {
             const href = (link.getAttribute('href') || '').toLowerCase();
             const normalized = href.replace('.html', '').replace('index', 'home');
-
-            console.log('[hero] evaluating link', href, 'normalized to', normalized);
 
             if (normalized === activePage) {
               link.setAttribute('aria-current', 'page');
@@ -51,24 +42,14 @@
           });
 
           section.dataset.activePage = activePage;
-          document.body.dataset.activePage = activePage;
-          console.log('[hero] body dataset activePage set to', document.body.dataset.activePage);
-          document.dispatchEvent(new CustomEvent('hero:active-page', {
-            detail: { activePage }
-          }));
         }
 
         if (dataset.bannerTitle) {
           titleEl.textContent = dataset.bannerTitle;
         }
 
-        if (descEl) {
-          if (dataset.bannerDescription) {
-            descEl.textContent = dataset.bannerDescription;
-          }
-          if (dataset.bannerHideDescription === 'true') {
-            descEl.remove();
-          }
+        if (descEl && dataset.bannerDescription) {
+          descEl.textContent = dataset.bannerDescription;
         }
 
         if (ctaEl) {
@@ -81,9 +62,6 @@
           if (dataset.bannerCtaTarget) {
             ctaEl.setAttribute('target', dataset.bannerCtaTarget);
           }
-          if (dataset.bannerHideCta === 'true') {
-            ctaEl.remove();
-          }
         }
 
         if (bgImageEl && dataset.bannerImage) {
@@ -94,7 +72,7 @@
         }
 
         const align = dataset.bannerAlign;
-        copyWrapper.classList.remove('text-left', 'md:text-left', 'text-right', 'md:text-right');
+        copyWrapper.classList.remove('text-left', 'md:text-left', 'text-right', 'md:text-right', 'text-center');
         copyWrapper.classList.remove('mx-auto');
         copyWrapper.style.marginLeft = '';
         copyWrapper.style.marginRight = '';
