@@ -16,6 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
           container.innerHTML = html;
           container.removeAttribute("data-component-src");
 
+          const injected = container.querySelectorAll("script");
+          injected.forEach((candidate) => {
+            const content = candidate.textContent || "";
+            if (content.includes("Live reload enabled.") || content.includes("Code injected by live-server")) {
+              candidate.remove();
+            }
+          });
+
           const scripts = container.querySelectorAll("script");
           scripts.forEach((oldScript) => {
             const newScript = document.createElement("script");

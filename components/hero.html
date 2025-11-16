@@ -1,256 +1,10 @@
-<section class="hero-banner relative text-white overflow-hidden" x-data="{ mobileNavOpen: false }">
-  <style>
-    .hero-banner {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero-banner .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-
-    .hero-banner .hero-bg img {
-      width: 100%;
-      height: 100%;
-      -o-object-fit: cover;
-      object-fit: cover;
-    }
-
-    .hero-banner .hero-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(18, 8, 11, 0.35) 0%, rgba(72, 4, 20, 0.6) 55%, rgba(72, 4, 20, 0.85) 100%);
-    }
-
-    .hero-nav-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      width: 100%;
-    }
-
-    .hero-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.85rem;
-      text-decoration: none;
-    }
-
-    .hero-brand img {
-      height: 3.5rem;
-      width: auto;
-    }
-
-
-    .hero-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .hero-links a {
-      color: #1D1F1E;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .hero-links a:hover {
-      color: #6F1521;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .hero-contact {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.6rem 1.6rem;
-      border-radius: 9999px;
-      border: 1px solid #1D1F1E;
-      color: #1D1F1E;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      background: #FFFFFF;
-    }
-
-    .hero-contact:hover {
-      background-color: #1D1F1E;
-      color: #FFFFFF;
-    }
-
-    .hero-menu {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 0.35rem;
-      border: none;
-      background: transparent;
-      color: #1D1F1E;
-      cursor: pointer;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      padding: clamp(3rem, 8vw, 6rem) 0 5rem;
-      margin-top: 4.5rem;
-    }
-
-    .hero-copy {
-      max-width: 520px;
-    }
-
-    .hero-copy [data-hero-title] {
-      font-family: inherit;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-size: clamp(2.75rem, 6vw, 4.5rem);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-copy [data-hero-description] {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: rgba(255, 255, 255, 0.88);
-      font-weight: 300;
-      margin-bottom: 2.4rem;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 180px;
-      height: 56px;
-      border-radius: 9999px;
-      background-color: #F4B7C1;
-      color: #1D1F1E;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .hero-cta:hover {
-      background-color: #F7C5CE;
-      transform: translateY(-2px);
-    }
-
-    @media (max-width: 1023px) {
-      .hero-nav-card {
-        padding: 0.5rem 0;
-      }
-
-      .hero-brand img {
-        height: 3rem;
-      }
-
-      .hero-banner {
-        min-height: auto;
-      }
-
-      .hero-banner .hero-bg::after {
-        background: linear-gradient(190deg, rgba(24, 10, 13, 0.55) 0%, rgba(72, 4, 20, 0.82) 100%);
-      }
-
-      .hero-nav-card {
-        padding: 0.5rem 1.25rem;
-        gap: 1rem;
-      }
-
-      .hero-brand img {
-        height: 2.1rem;
-      }
-
-      .hero-brand {
-        gap: 0.75rem;
-      }
-
-      .hero-links {
-        display: none;
-      }
-      
-      .hero-contact {
-        display: none;
-      }
-
-      .hero-contact {
-        padding: 0.55rem 1.4rem;
-      }
-
-      .hero-menu {
-        display: inline-flex;
-      }
-
-      .hero-content {
-        padding: 3.5rem 0 4rem;
-      }
-
-      .hero-copy [data-hero-title] {
-        letter-spacing: 0.1em;
-      }
-
-      .hero-cta {
-        width: 100%;
-      }
-    }
-  </style>
+<section class="hero-banner relative overflow-hidden" x-data="{ mobileNavOpen: false }">
+  <div data-component-src="components/hero/styles.html"></div>
   <div class="hero-bg" aria-hidden="true">
     <img src="bg-wbanner.png" alt="Listening Community banner background" data-hero-bg/>
   </div>
-  <nav class="relative z-20 bg-white py-4 shadow-sm">
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between">
-        <a class="hero-brand" href="index.html">
-          <img src="images/LC-Logo-02.png" alt="Listening Community"/>
-        </a>
-        <ul class="hero-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="contact.html">Contact us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
-        <div class="hero-actions">
-          <a class="hero-contact" href="https://wa.me/918606966000?text=Hi%2C%20I%27m%20reaching%20out%20from%20the%20Listening%20Community%20website.%20I%27d%20love%20to%20connect%20with%20you." target="_blank" rel="noopener">Get In Touch <span aria-hidden="true">→</span></a>
-          <button class="hero-menu" type="button" aria-label="Toggle navigation" x-on:click="mobileNavOpen = !mobileNavOpen">
-            <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.19995 23.2H26.7999" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M5.19995 16H26.7999" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M5.19995 8.79999H26.7999" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <div class="hero-content">
-    <div class="container mx-auto px-4">
-      <div class="hero-copy mx-auto text-center">
-        <h1 data-hero-title>Listening Matters</h1>
-        <p data-hero-description>
-          At Listening Community, we believe that listening is an act of love — one that saves lives, builds empathy, and strengthens communities. Join us in creating a culture of care.<br/>
-          <br/>
-          Get involved. Be a listener. Make a difference.
-        </p>
-        <a href="contact.html" class="hero-cta" data-hero-cta>Get Listened</a>
-      </div>
-    </div>
-  </div>
+  <div data-component-src="components/hero/nav.html"></div>
+  <div data-component-src="components/hero/content.html"></div>
   <div data-component-src="components/mobile-menu.html"></div>
   <script>
     (() => {
@@ -267,84 +21,84 @@
         return;
       }
 
-      const activePage = (dataset.bannerActivePage || '').toLowerCase();
-      if (activePage) {
+      const syncHero = () => {
         const navLinks = section.querySelectorAll('.hero-links a');
-        navLinks.forEach((link) => {
-          const href = (link.getAttribute('href') || '').toLowerCase();
-          const normalized = href
-            .replace('.html', '')
-            .replace('index', 'home');
+        const titleEl = section.querySelector('[data-hero-title]');
+        const descEl = section.querySelector('[data-hero-description]');
+        const ctaEl = section.querySelector('[data-hero-cta]');
+        const bgImageEl = section.querySelector('[data-hero-bg]');
+        const copyWrapper = section.querySelector('.hero-copy');
 
-          if (normalized === activePage) {
-            const listItem = link.closest('li');
-            if (listItem) {
-              listItem.remove();
+        if (!navLinks.length || !titleEl || !copyWrapper) {
+          requestAnimationFrame(syncHero);
+          return;
+        }
+
+        const activePage = (dataset.bannerActivePage || '').toLowerCase();
+        if (activePage) {
+          navLinks.forEach((link) => {
+            const href = (link.getAttribute('href') || '').toLowerCase();
+            const normalized = href.replace('.html', '').replace('index', 'home');
+
+            if (normalized === activePage) {
+              link.setAttribute('aria-current', 'page');
             } else {
-              link.remove();
+              link.removeAttribute('aria-current');
             }
+          });
+
+          section.dataset.activePage = activePage;
+          document.body.dataset.activePage = activePage;
+        }
+
+        if (dataset.bannerTitle) {
+          titleEl.textContent = dataset.bannerTitle;
+        }
+
+        if (descEl) {
+          if (dataset.bannerDescription) {
+            descEl.textContent = dataset.bannerDescription;
           }
-        });
-      }
+          if (dataset.bannerHideDescription === 'true') {
+            descEl.remove();
+          }
+        }
 
-      const titleEl = section.querySelector('[data-hero-title]');
-      if (titleEl && dataset.bannerTitle) {
-        titleEl.textContent = dataset.bannerTitle;
-      }
+        if (ctaEl) {
+          if (dataset.bannerCtaText) {
+            ctaEl.textContent = dataset.bannerCtaText;
+          }
+          if (dataset.bannerCtaLink) {
+            ctaEl.setAttribute('href', dataset.bannerCtaLink);
+          }
+          if (dataset.bannerCtaTarget) {
+            ctaEl.setAttribute('target', dataset.bannerCtaTarget);
+          }
+          if (dataset.bannerHideCta === 'true') {
+            ctaEl.remove();
+          }
+        }
 
-      const descEl = section.querySelector('[data-hero-description]');
-      if (descEl) {
-        if (dataset.bannerDescription) {
-          descEl.textContent = dataset.bannerDescription;
+        if (bgImageEl && dataset.bannerImage) {
+          bgImageEl.setAttribute('src', dataset.bannerImage);
+          if (dataset.bannerImageAlt) {
+            bgImageEl.setAttribute('alt', dataset.bannerImageAlt);
+          }
         }
-        if (dataset.bannerHideDescription === 'true') {
-          descEl.remove();
-        }
-      }
 
-      const ctaEl = section.querySelector('[data-hero-cta]');
-      if (ctaEl) {
-        if (dataset.bannerCtaText) {
-          ctaEl.textContent = dataset.bannerCtaText;
-        }
-        if (dataset.bannerCtaLink) {
-          ctaEl.setAttribute('href', dataset.bannerCtaLink);
-        }
-        if (dataset.bannerCtaTarget) {
-          ctaEl.setAttribute('target', dataset.bannerCtaTarget);
-        }
-        if (dataset.bannerHideCta === 'true') {
-          ctaEl.remove();
-        }
-      }
-
-      const bgImageEl = section.querySelector('[data-hero-bg]');
-      if (bgImageEl && dataset.bannerImage) {
-        bgImageEl.setAttribute('src', dataset.bannerImage);
-        if (dataset.bannerImageAlt) {
-          bgImageEl.setAttribute('alt', dataset.bannerImageAlt);
-        }
-      }
-
-      const copyWrapper = section.querySelector('.hero-copy');
-      if (copyWrapper) {
         const align = dataset.bannerAlign;
+        copyWrapper.classList.remove('text-left', 'md:text-left', 'text-right', 'md:text-right');
+        copyWrapper.classList.remove('mx-auto');
+        copyWrapper.style.marginLeft = '';
+        copyWrapper.style.marginRight = '';
+
         if (align === 'left') {
-          copyWrapper.classList.remove('text-center');
           copyWrapper.classList.add('text-left', 'md:text-left');
-          copyWrapper.classList.remove('mx-auto');
-        } else if (align === 'right') {
-          copyWrapper.classList.remove('text-center');
-          copyWrapper.classList.add('text-right', 'md:text-right');
-          copyWrapper.classList.remove('mx-auto');
-          copyWrapper.style.marginLeft = 'auto';
-        }
-
-        if (align === 'left') {
           copyWrapper.style.marginRight = 'auto';
-        }
-
-        if (align === 'center' && !copyWrapper.classList.contains('text-center')) {
+        } else if (align === 'right') {
+          copyWrapper.classList.add('text-right', 'md:text-right');
+          copyWrapper.style.marginLeft = 'auto';
+        } else {
           copyWrapper.classList.add('text-center');
           copyWrapper.style.marginLeft = 'auto';
           copyWrapper.style.marginRight = 'auto';
@@ -352,8 +106,12 @@
 
         if (dataset.bannerMaxWidth) {
           copyWrapper.style.maxWidth = dataset.bannerMaxWidth;
+        } else {
+          copyWrapper.style.maxWidth = '';
         }
-      }
+      };
+
+      syncHero();
     })();
   </script>
 </section>
