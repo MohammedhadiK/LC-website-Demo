@@ -13,7 +13,7 @@
       </ul>
       <div class="hero-actions">
         <a class="hero-contact" href="https://wa.me/918606966000?text=Hi%2C%20I%27m%20reaching%20out%20from%20the%20Listening%20Community%20website.%20I%27d%20love%20to%20connect%20with%20you." target="_blank" rel="noopener">Get In Touch <span aria-hidden="true">→</span></a>
-        <button class="hero-menu" type="button" aria-label="Toggle navigation" x-on:click="mobileNavOpen = !mobileNavOpen">
+        <button id="hero-menu-toggle" class="hero-menu" type="button" aria-label="Toggle navigation" x-on:click="mobileNavOpen = !mobileNavOpen">
           <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.19995 23.2H26.7999" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="M5.19995 16H26.7999" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -24,3 +24,24 @@
     </div>
   </div>
 </nav>
+
+<div class="hero-mobile-nav-backdrop" x-show="mobileNavOpen" x-cloak x-transition.opacity.duration.200ms x-on:click="mobileNavOpen = false"></div>
+
+<aside class="hero-mobile-nav-panel" x-show="mobileNavOpen" x-cloak x-transition.duration.200ms aria-label="Mobile navigation">
+  <div class="hero-mobile-nav-header">
+    <a class="hero-brand" href="index.html" x-on:click="mobileNavOpen = false">
+      <img src="images/LC-Logo-02.png" alt="Listening Community"/>
+    </a>
+    <button class="hero-mobile-nav-close" type="button" aria-label="Close navigation" x-on:click="mobileNavOpen = false">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <ul class="hero-mobile-links" role="list">
+    <li><a href="index.html" x-on:click="mobileNavOpen = false">Home</a></li>
+    <li><a href="about.html" x-on:click="mobileNavOpen = false">About us</a></li>
+    <li><a href="programs.html" x-on:click="mobileNavOpen = false">Programs</a></li>
+    <li><a href="contact.html" x-on:click="mobileNavOpen = false">Contact us</a></li>
+    <li><a href="blog.html" x-on:click="mobileNavOpen = false">Blog</a></li>
+  </ul>
+  <a class="hero-mobile-contact" href="https://wa.me/918606966000?text=Hi%2C%20I%27m%20reaching%20out%20from%20the%20Listening%20Community%20website.%20I%27d%20love%20to%20connect%20with%20you." target="_blank" rel="noopener" x-on:click="mobileNavOpen = false">Get In Touch <span aria-hidden="true">→</span></a>
+</aside>

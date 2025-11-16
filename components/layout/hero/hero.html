@@ -17,20 +17,23 @@
 
       const syncHero = () => {
         const navLinks = section.querySelectorAll('.hero-links a');
+        const mobileLinks = section.querySelectorAll('.hero-mobile-links a');
         const titleEl = section.querySelector('[data-hero-title]');
         const descEl = section.querySelector('[data-hero-description]');
         const ctaEl = section.querySelector('[data-hero-cta]');
         const bgImageEl = section.querySelector('[data-hero-bg]');
         const copyWrapper = section.querySelector('.hero-copy');
 
-        if (!navLinks.length || !titleEl || !copyWrapper) {
+        if ((!navLinks.length && !mobileLinks.length) || !titleEl || !copyWrapper) {
           requestAnimationFrame(syncHero);
           return;
         }
 
         const activePage = (dataset.bannerActivePage || '').toLowerCase();
         if (activePage) {
-          navLinks.forEach((link) => {
+          const allNavLinks = [...navLinks, ...mobileLinks];
+
+          allNavLinks.forEach((link) => {
             const href = (link.getAttribute('href') || '').toLowerCase();
             const normalized = href.replace('.html', '').replace('index', 'home');
 
