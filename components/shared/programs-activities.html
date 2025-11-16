@@ -1,87 +1,167 @@
-v<section style="padding:16px; background:white;">
-  <div style="padding:64px 20px 96px; background:#FFC0CB; border-radius:24px;">
-    <div style="max-width:1200px; margin:0 auto; padding:0 16px;">
+<style>
+  .programs-activities-section {
+    padding: 16px;
+    background: #fff;
+  }
 
-      <!-- Tag row -->
-      <div style="display:flex; align-items:center; margin-bottom:16px;">
-        <i class="fa-solid fa-circle" style="font-size:8px; color:#022C22;"></i>
-        <span style="margin-left:8px; font-size:14px; font-weight:500;">Programs & activities</span>
+  .programs-activities-wrapper {
+    padding: 64px 20px 96px;
+    background: #FFC0CB;
+    border-radius: 24px;
+  }
+
+  .programs-activities-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .programs-activities-tag {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .programs-activities-tag i {
+    font-size: 8px;
+    color: #022C22;
+  }
+
+  .programs-activities-tag span {
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .programs-activities-border {
+    border-top: 1px solid rgba(2, 44, 34, 0.25);
+    padding-top: 56px;
+  }
+
+  .programs-activities-heading {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 96px;
+    line-height: 1.1;
+  }
+
+  .programs-activities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .programs-activities-card {
+    width: 100%;
+    padding: 0 16px;
+    margin-bottom: 64px;
+  }
+
+  .programs-activities-icon {
+    width: 48px;
+    height: 48px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .programs-activities-icon i {
+    font-size: 24px;
+    color: #022C22;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+  }
+
+  .programs-activities-card h5 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 24px 0 12px;
+  }
+
+  .programs-activities-card p {
+    margin-bottom: 24px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 640px) {
+    .programs-activities-heading {
+      font-size: 56px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .programs-activities-card {
+      width: 50%;
+    }
+
+    .programs-activities-card:nth-last-child(-n + 2) {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .programs-activities-card {
+      margin-bottom: 48px;
+    }
+
+    .programs-activities-card:last-child {
+      margin-bottom: 0;
+    }
+  }
+</style>
+
+<section class="programs-activities-section">
+  <div class="programs-activities-wrapper">
+    <div class="programs-activities-container">
+      <div class="programs-activities-tag">
+        <i class="fa-solid fa-circle" aria-hidden="true"></i>
+        <span>Programs &amp; activities</span>
       </div>
-
-      <!-- Border + content -->
-      <div style="border-top:1px solid rgba(2,44,34,0.25); padding-top:56px;">
-
-        <h1 style="font-size:40px; font-weight:700; margin-bottom:96px; line-height:1.1;">
-          Building a community
-        </h1>
-
-        <!-- Grid -->
-        <div style="display:flex; flex-wrap:wrap; margin-left:-16px; margin-right:-16px;">
-
-          <!-- Item 1 -->
-          <div style="width:100%; max-width:50%; padding:0 16px; margin-bottom:64px;">
+      <div class="programs-activities-border">
+        <h1 class="programs-activities-heading">Building a community</h1>
+        <div class="programs-activities-grid">
+          <div class="programs-activities-card">
+            <div class="programs-activities-icon">
+              <i class="fa-solid fa-headset" aria-hidden="true"></i>
+            </div>
             <div>
-              <div style="width:48px; height:48px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-headset" style="font-size:24px; color:#022C22;"></i>
-              </div>
-              <div style="margin-top:24px;">
-                <h5 style="font-size:22px; font-weight:600; margin-bottom:12px;">Listening Helpline</h5>
-                <p style="margin-bottom:24px; font-size:16px; line-height:1.5;">
-                  Our 24/7 volunteer-based helpline offers a safe and confidential space for anyone who needs to talk. Just reach out and get listened to — no judgment, no advice, just genuine understanding and care.
-                </p>
-              </div>
+              <h5>Listening Helpline</h5>
+              <p>Our 24/7 volunteer-based helpline offers a safe and confidential space for anyone who needs to talk. Just reach out and get listened to — no judgment, no advice, just genuine understanding and care.</p>
             </div>
           </div>
-
-          <!-- Item 2 -->
-          <div style="width:100%; max-width:50%; padding:0 16px; margin-bottom:64px;">
+          <div class="programs-activities-card">
+            <div class="programs-activities-icon">
+              <i class="fa-solid fa-comments" aria-hidden="true"></i>
+            </div>
             <div>
-              <div style="width:48px; height:48px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-comments" style="font-size:24px; color:#022C22;"></i>
-              </div>
-              <div style="margin-top:24px;">
-                <h5 style="font-size:22px; font-weight:600; margin-bottom:12px;">Listening Circle</h5>
-                <p style="margin-bottom:24px; font-size:16px; line-height:1.5;">
-                  A supportive group space where individuals come together to share, listen, and connect. Guided by trained facilitators, Listening Circles promote empathy, mutual respect, and emotional healing within the community.
-                </p>
-              </div>
+              <h5>Listening Circle</h5>
+              <p>A supportive group space where individuals come together to share, listen, and connect. Guided by trained facilitators, Listening Circles promote empathy, mutual respect, and emotional healing within the community.</p>
             </div>
           </div>
-
-          <!-- Item 3 -->
-          <div style="width:100%; max-width:50%; padding:0 16px; margin-bottom:64px;">
+          <div class="programs-activities-card">
+            <div class="programs-activities-icon">
+              <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
+            </div>
             <div>
-              <div style="width:48px; height:48px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-chalkboard-user" style="font-size:24px; color:#022C22;"></i>
-              </div>
-              <div style="margin-top:24px;">
-                <h5 style="font-size:22px; font-weight:600; margin-bottom:12px;">Upskilling & Programs</h5>
-                <p style="margin-bottom:24px; font-size:16px; line-height:1.5;">
-                  Trainings and workshops to build listening and mental health support skills, including Listening Skill Training, Suicide Gatekeeper Training, and Mental Health First Aid.
-                </p>
-              </div>
+              <h5>Upskilling &amp; Programs</h5>
+              <p>Trainings and workshops to build listening and mental health support skills, including Listening Skill Training, Suicide Gatekeeper Training, and Mental Health First Aid.</p>
             </div>
           </div>
-
-          <!-- Item 4 -->
-          <div style="width:100%; max-width:50%; padding:0 16px;">
+          <div class="programs-activities-card">
+            <div class="programs-activities-icon">
+              <i class="fa-solid fa-hands-helping" aria-hidden="true"></i>
+            </div>
             <div>
-              <div style="width:48px; height:48px; background:white; border-radius:8px; display:flex; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-handshake-angle" style="font-size:24px; color:#022C22;"></i>
-              </div>
-              <div style="margin-top:24px;">
-                <h5 style="font-size:22px; font-weight:600; margin-bottom:12px;">Collaboration</h5>
-                <p style="margin-bottom:24px; font-size:16px; line-height:1.5;">
-                  Partnerships with institutions and communities to promote listening culture through Listening Clubs and awareness initiatives.
-                </p>
-              </div>
+              <h5>Collaboration</h5>
+              <p>Partnerships with institutions and communities to promote listening culture through Listening Clubs and awareness initiatives.</p>
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   </div>
 </section>
