@@ -1,45 +1,47 @@
 <!-- Mobile Menu -->
 <div class="fixed inset-0 z-50 flex justify-end" x-show="mobileNavOpen" x-cloak>
   <div class="fixed inset-0 bg-black/40" x-on:click="mobileNavOpen = false"></div>
-  <div class="relative w-full xs:w-5/6 xs:max-w-md h-screen max-h-screen bg-white shadow-2xl overflow-y-auto">
-    <div class="p-6 h-full flex flex-col">
-      <!-- Header -->
-      <div class="flex items-center justify-between mb-10">
-        <a class="hero-brand" href="index.html">
-          <img src="images/LC-Logo-02.png" alt="Listening Community" class="h-12"/>
-        </a>
-        <button x-on:click="mobileNavOpen = false" class="p-3 -mr-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+  <div class="relative w-full xs:w-5/6 xs:max-w-md h-screen max-h-screen bg-white shadow-2xl flex flex-col">
+    <div class="flex-1 overflow-y-auto">
+      <div class="p-6 flex flex-col h-full">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-10">
+          <a class="hero-brand" href="index.html">
+            <img src="images/LC-Logo-02.png" alt="Listening Community" class="h-12"/>
+          </a>
+          <button x-on:click="mobileNavOpen = false" class="p-3 -mr-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
 
-      <!-- Navigation Links -->
-      <nav class="flex-1 space-y-2">
-        <a href="index.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
-          Home
-        </a>
-        <a href="about.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
-          About Us
-        </a>
-        <a href="programs.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
-          Programs
-        </a>
-        <a href="blog.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
-          Blog
-        </a>
-        <a href="contact.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
-          Contact
-        </a>
-      </nav>
-
-      <!-- CTA Button -->
-      <div class="mt-auto pt-6">
-        <a href="https://wa.me/918606966000?text=Hi%2C%20I%27m%20reaching%20out%20from%20the%20Listening%20Community%20website.%20I%27d%20love%20to%20connect%20with%20you." target="_blank" rel="noopener" class="block w-full px-6 py-4 text-center text-lg text-white bg-[#800020] hover:bg-[#a00028] rounded-xl font-semibold transition-colors">
-          Get In Touch
-        </a>
+        <!-- Navigation Links -->
+        <nav class="space-y-2">
+          <a href="index.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
+            Home
+          </a>
+          <a href="about.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
+            About Us
+          </a>
+          <a href="programs.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
+            Programs
+          </a>
+          <a href="blog.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
+            Blog
+          </a>
+          <a href="contact.html" class="flex items-center px-6 py-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
+            Contact
+          </a>
+        </nav>
       </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="px-6 pb-6">
+      <a href="https://wa.me/918606966000?text=Hi%2C%20I%27m%20reaching%20out%20from%20the%20Listening%20Community%20website.%20I%27d%20love%20to%20connect%20with%20you." target="_blank" rel="noopener" class="block w-full px-6 py-4 text-center text-lg text-white bg-[#800020] hover:bg-[#a00028] rounded-xl font-semibold transition-colors">
+        Get In Touch
+      </a>
     </div>
   </div>
   <script>
