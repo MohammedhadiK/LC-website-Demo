@@ -117,13 +117,18 @@
       let startX = 0;
       let scrollLeft = 0;
       let resumeTimeout;
+      let lastTime = 0;
 
-      const pauseAutoScroll = () => {
-        isPaused = true;
+      const pauseAutoScroll = (delay = 0) => {
         clearTimeout(resumeTimeout);
-        resumeTimeout = setTimeout(() => {
+        if (delay <= 0) {
           isPaused = false;
-        }, 2000);
+        } else {
+          isPaused = true;
+          resumeTimeout = setTimeout(() => {
+            isPaused = false;
+          }, delay);
+        }
       };
 
       container.addEventListener('pointerdown', (e) => {
@@ -139,6 +144,7 @@
         if (!isDown) return;
         isDown = false;
         container.classList.remove('is-dragging');
+        pauseAutoScroll();
       });
 
       container.addEventListener('pointerup', (e) => {
@@ -162,16 +168,26 @@
           return;
         }
         container.scrollBy({ left: e.deltaY, behavior: 'smooth' });
-        pauseAutoScroll();
+        pauseAutoScroll(800);
         e.preventDefault();
       }, { passive: false });
 
-      const AUTO_SPEED = 0.5;
+      const AUTO_SPEED_PX_PER_SEC = 60;
 
-      const autoScroll = () => {
-        if (!isDown && !isPaused) {
-          container.scrollLeft += AUTO_SPEED;
-          if (container.scrollLeft >= track.scrollWidth - container.clientWidth) {
+      const autoScroll = (timestamp) => {
+        if (!lastTime) {
+          lastTime = timestamp;
+        }
+
+        const delta = timestamp - lastTime;
+        lastTime = timestamp;
+
+        const maxScroll = track.scrollWidth - container.clientWidth;
+
+        if (maxScroll > 0 && !isDown && !isPaused) {
+          const distance = (AUTO_SPEED_PX_PER_SEC * delta) / 1000;
+          container.scrollLeft += distance;
+          if (container.scrollLeft >= maxScroll) {
             container.scrollLeft = 0;
           }
         }
