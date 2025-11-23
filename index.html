@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pO12rBkXgPmmZsjJ7VKByQVnu3TrgL2TGibQV1lyRvYdCa01nzn8/dxBQlDMz/PpLCG6qbsdvW9/M6+VugFQxw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/tailwind/tailwind.min.css"/>
     <link rel="icon" type="image/png" sizes="32x32" href="images/LC-Logo-02.png"/>
     <meta property="og:image" content="https://listeningcommunity.org/images/LC-Logo-02.png"/>
@@ -14,6 +14,22 @@
     <meta name="twitter:description" content="Discover programs, stories, and support resources that bring compassionate listening to every community."/>
     <meta name="twitter:image" content="https://listeningcommunity.org/images/LC-Logo-02.png"/>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer="defer"></script>
+    <style>
+      /* Ensure Font Awesome icons render properly */
+      .fa, .fas, .far, .fal, .fab, .fa-solid, .fa-regular, .fa-light, .fa-brands {
+        font-family: "Font Awesome 6 Free" !important;
+      }
+      .fa-solid, .fas {
+        font-weight: 900 !important;
+      }
+      .fa-regular, .far {
+        font-weight: 400 !important;
+      }
+      .fa-brands, .fab {
+        font-family: "Font Awesome 6 Brands" !important;
+        font-weight: 400 !important;
+      }
+    </style>
   </head>
   <body class="antialiased bg-body text-body font-body">
     <div data-component-src="components/shared/meta-tags.html"

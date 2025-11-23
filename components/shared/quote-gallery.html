@@ -61,7 +61,83 @@
         transition: none;
       }
     }
-  </style>
+
+    /* Lightbox Modal Styles */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      cursor: pointer;
+    }
+
+    .lightbox-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-content {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox-modal.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #022C22;
+      transition: transform 0.2s ease, background 0.2s ease;
+      z-index: 10001;
+      line-height: 1;
+      font-weight: 300;
+    }
+
+    .lightbox-close:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .quote-gallery-item {
+      cursor: pointer;
+    }</style>
   <div class="container mx-auto px-4">
     <div class="quote-gallery-marquee" data-quote-gallery>
       <div class="quote-gallery-track">
@@ -104,9 +180,18 @@
       </div>
     </div>
   </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-content">
+      <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+      <img class="lightbox-image" src="" alt="" id="lightbox-image">
+    </div>
+  </div>
   <script>
     (() => {
-      const container = document.currentScript?.previousElementSibling?.querySelector('[data-quote-gallery]');
+      // Look for the container within the parent section, not just the previous sibling
+      const container = document.currentScript?.parentElement?.querySelector('[data-quote-gallery]');
       if (!container) return;
 
       const track = container.querySelector('.quote-gallery-track');
@@ -195,6 +280,87 @@
       };
 
       requestAnimationFrame(autoScroll);
+
+      // Lightbox functionality
+      const lightboxModal = document.getElementById('lightbox-modal');
+      const lightboxImage = document.getElementById('lightbox-image');
+      const lightboxClose = lightboxModal?.querySelector('.lightbox-close');
+      const galleryItems = container.querySelectorAll('.quote-gallery-item');
+
+      const openLightbox = (imageSrc, imageAlt) => {
+        if (!lightboxModal || !lightboxImage) return;
+        lightboxImage.src = imageSrc;
+        lightboxImage.alt = imageAlt;
+        lightboxModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeLightbox = () => {
+        if (!lightboxModal) return;
+        lightboxModal.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+
+      let dragDistance = 0;
+      let clickStartX = 0;
+
+      // Track drag distance
+      container.addEventListener('pointerdown', (e) => {
+        clickStartX = e.clientX;
+        dragDistance = 0;
+      });
+
+      container.addEventListener('pointermove', (e) => {
+        if (isDown) {
+          dragDistance = Math.abs(e.clientX - clickStartX);
+        }
+      });
+
+      // Add click handlers to all gallery items
+      galleryItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          const img = item.querySelector('.quote-gallery-image');
+          // Only open if not dragging (drag distance less than 5px)
+          if (img && dragDistance < 5) {
+            openLightbox(img.src, img.alt);
+          }
+        });
+
+        // Keyboard accessibility
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const img = item.querySelector('.quote-gallery-image');
+            if (img) {
+              openLightbox(img.src, img.alt);
+            }
+          }
+        });
+      });
+
+      // Close button
+      if (lightboxClose) {
+        lightboxClose.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closeLightbox();
+        });
+      }
+
+      // Click anywhere on modal to close (except the image itself)
+      if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+          if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
+            closeLightbox();
+          }
+        });
+      }
+
+      // ESC key to close
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxModal?.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
     })();
   </script>
 </section>
