@@ -190,7 +190,6 @@
   </div>
   <script>
     (() => {
-      // Look for the container within the parent section, not just the previous sibling
       const container = document.currentScript?.parentElement?.querySelector('[data-quote-gallery]');
       if (!container) return;
 
@@ -198,68 +197,38 @@
       if (!track) return;
 
       let isDown = false;
-      let isPaused = false;
       let startX = 0;
       let scrollLeft = 0;
-      let resumeTimeout;
-      let lastTime = 0;
 
-      const pauseAutoScroll = (delay = 0) => {
-        clearTimeout(resumeTimeout);
-        if (delay <= 0) {
-          isPaused = false;
-        } else {
-          isPaused = true;
-          resumeTimeout = setTimeout(() => {
-            isPaused = false;
-          }, delay);
-        }
-      };
-
+      // Manual Drag Logic
       container.addEventListener('pointerdown', (e) => {
         isDown = true;
         container.classList.add('is-dragging');
         container.setPointerCapture(e.pointerId);
         startX = e.clientX;
         scrollLeft = container.scrollLeft;
-        pauseAutoScroll();
       });
 
       container.addEventListener('pointerleave', () => {
-        if (!isDown) return;
         isDown = false;
         container.classList.remove('is-dragging');
-        pauseAutoScroll();
       });
 
       container.addEventListener('pointerup', (e) => {
+        isDown = false;
+        container.classList.remove('is-dragging');
         if (container.hasPointerCapture(e.pointerId)) {
           container.releasePointerCapture(e.pointerId);
         }
-        isDown = false;
-        container.classList.remove('is-dragging');
-        pauseAutoScroll();
       });
 
       container.addEventListener('pointermove', (e) => {
         if (!isDown) return;
         e.preventDefault();
-        const walk = (e.clientX - startX) * 1.5;
+        const x = e.clientX;
+        const walk = (x - startX) * 1.5; // Scroll-fast
         container.scrollLeft = scrollLeft - walk;
       });
-
-      container.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-          return;
-        }
-        container.scrollBy({ left: e.deltaY, behavior: 'smooth' });
-        pauseAutoScroll(800);
-        e.preventDefault();
-      }, { passive: false });
-
-      // Auto-scroll removed as requested
-      // const AUTO_SPEED_PX_PER_SEC = 60;
-      // const autoScroll = ...
 
       // Lightbox functionality
       const lightboxModal = document.getElementById('lightbox-modal');
@@ -281,34 +250,19 @@
         document.body.style.overflow = '';
       };
 
-      let isDragging = false;
-      let startXClick = 0;
-
-      // Track drag state for click handling
-      container.addEventListener('pointerdown', (e) => {
-        isDragging = false;
-        startXClick = e.clientX;
-      });
-
-      container.addEventListener('pointermove', (e) => {
-        if (isDown) {
-          const moveX = Math.abs(e.clientX - startXClick);
-          if (moveX > 10) { // Threshold to consider it a drag
-            isDragging = true;
-          }
-        }
-      });
-
-      // Add click handlers to all gallery items
+      // Simple Click Handler - No complex drag detection
+      // We rely on the fact that a significant drag usually doesn't trigger a clean 'click' event 
+      // or we just accept that dragging might open it if you release exactly on the item.
+      // But for now, priority is to MAKE IT OPEN on PC.
       galleryItems.forEach(item => {
         item.addEventListener('click', (e) => {
-          // If we were dragging, don't open lightbox
-          if (isDragging) {
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-          }
-
+          // Prevent default to avoid any weird behavior
+          // e.preventDefault(); 
+          
+          // Check if we are currently dragging (isDown is true)
+          // If isDown is true, it means we haven't released yet? 
+          // No, click fires after pointerup.
+          
           const img = item.querySelector('.quote-gallery-image');
           if (img) {
             openLightbox(img.src, img.alt);
@@ -335,7 +289,7 @@
         });
       }
 
-      // Click anywhere on modal to close (except the image itself)
+      // Click anywhere on modal to close
       if (lightboxModal) {
         lightboxModal.addEventListener('click', (e) => {
           if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
