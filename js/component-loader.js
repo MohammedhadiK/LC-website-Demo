@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("Component Loader v2.3 DEBUG loaded");
   const isPreloaderDisabled = () => window.LC_DISABLE_PRELOADER === true || document.documentElement.hasAttribute("data-disable-preloader");
   const PRELOADER_HIDE_DELAY_MS = 2000;
 
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (const container of containers) {
       const src = container.getAttribute("data-component-src");
+      console.log(`Processing component: ${src}`);
 
       try {
         const response = await fetch(src, { cache: "no-store" });
@@ -64,8 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
             content.includes("Code injected by live-server") ||
             content.includes("For SVG support") ||
             content.includes("refreshCSS") ||
-            content.includes("WebSocket") && content.includes("window.location.reload")
+            (content.includes("WebSocket") && content.includes("window.location.reload"))
           ) {
+            console.log("Removing live-server script in " + src);
             candidate.remove();
           }
         });
@@ -85,7 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
             newScript.textContent = oldScript.textContent;
           }
 
-          oldScript.replaceWith(newScript);
+          try {
+            console.log(`Executing script in ${src}. Length: ${newScript.textContent.length}`);
+             if (newScript.textContent.length > 0) {
+              console.log("Script preview:", newScript.textContent.substring(0, 100));
+            }
+            oldScript.replaceWith(newScript);
+          } catch (e) {
+            console.error(`CRITICAL ERROR executing script in ${src}:`, e);
+            console.log("FULL Script content that failed:", newScript.textContent);
+          }
         });
 
         // Recursively load nested components
@@ -101,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
       } catch (error) {
-        console.error(error);
+        console.error(`Error loading ${src}:`, error);
       }
     }
 

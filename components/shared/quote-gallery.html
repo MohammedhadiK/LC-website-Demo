@@ -257,29 +257,9 @@
         e.preventDefault();
       }, { passive: false });
 
-      const AUTO_SPEED_PX_PER_SEC = 60;
-
-      const autoScroll = (timestamp) => {
-        if (!lastTime) {
-          lastTime = timestamp;
-        }
-
-        const delta = timestamp - lastTime;
-        lastTime = timestamp;
-
-        const maxScroll = track.scrollWidth - container.clientWidth;
-
-        if (maxScroll > 0 && !isDown && !isPaused) {
-          const distance = (AUTO_SPEED_PX_PER_SEC * delta) / 1000;
-          container.scrollLeft += distance;
-          if (container.scrollLeft >= maxScroll) {
-            container.scrollLeft = 0;
-          }
-        }
-        requestAnimationFrame(autoScroll);
-      };
-
-      requestAnimationFrame(autoScroll);
+      // Auto-scroll removed as requested
+      // const AUTO_SPEED_PX_PER_SEC = 60;
+      // const autoScroll = ...
 
       // Lightbox functionality
       const lightboxModal = document.getElementById('lightbox-modal');
@@ -301,27 +281,36 @@
         document.body.style.overflow = '';
       };
 
-      let dragDistance = 0;
-      let clickStartX = 0;
+      let isDragging = false;
+      let startXClick = 0;
 
-      // Track drag distance
+      // Track drag state for click handling
       container.addEventListener('pointerdown', (e) => {
-        clickStartX = e.clientX;
-        dragDistance = 0;
+        isDragging = false;
+        startXClick = e.clientX;
       });
 
       container.addEventListener('pointermove', (e) => {
         if (isDown) {
-          dragDistance = Math.abs(e.clientX - clickStartX);
+          const moveX = Math.abs(e.clientX - startXClick);
+          if (moveX > 10) { // Threshold to consider it a drag
+            isDragging = true;
+          }
         }
       });
 
       // Add click handlers to all gallery items
       galleryItems.forEach(item => {
         item.addEventListener('click', (e) => {
+          // If we were dragging, don't open lightbox
+          if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+
           const img = item.querySelector('.quote-gallery-image');
-          // Only open if not dragging (drag distance less than 5px)
-          if (img && dragDistance < 5) {
+          if (img) {
             openLightbox(img.src, img.alt);
           }
         });
