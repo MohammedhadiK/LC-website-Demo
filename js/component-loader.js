@@ -37,60 +37,82 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("load", () => scheduleHidePreloader(true), { once: true });
 
-  const loadComponents = (root = document) => {
+  const loadComponents = async (root = document) => {
     const containers = root.querySelectorAll('[data-component-src]');
 
-    containers.forEach((container) => {
+    for (const container of containers) {
       const src = container.getAttribute("data-component-src");
 
-      fetch(src, { cache: "no-store" })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Failed to load component: ${src}`);
+      try {
+        const response = await fetch(src, { cache: "no-store" });
+        
+        if (!response.ok) {
+          throw new Error(`Failed to load component: ${src}`);
+        }
+
+        const html = await response.text();
+        container.innerHTML = html;
+        container.removeAttribute("data-component-src");
+
+        // Remove live-server injected scripts
+        const injected = container.querySelectorAll("script");
+        injected.forEach((candidate) => {
+          const content = candidate.textContent || "";
+          // Check for various live reload signatures
+          if (
+            content.includes("Live reload enabled.") || 
+            content.includes("Code injected by live-server") ||
+            content.includes("For SVG support") ||
+            content.includes("refreshCSS") ||
+            content.includes("WebSocket") && content.includes("window.location.reload")
+          ) {
+            candidate.remove();
           }
-          return response.text();
-        })
-        .then((html) => {
-          container.innerHTML = html;
-          container.removeAttribute("data-component-src");
-
-          const injected = container.querySelectorAll("script");
-          injected.forEach((candidate) => {
-            const content = candidate.textContent || "";
-            if (content.includes("Live reload enabled.") || content.includes("Code injected by live-server")) {
-              candidate.remove();
-            }
-          });
-
-          const scripts = container.querySelectorAll("script");
-          scripts.forEach((oldScript) => {
-            const newScript = document.createElement("script");
-
-            Array.from(oldScript.attributes).forEach((attr) => {
-              newScript.setAttribute(attr.name, attr.value);
-            });
-
-            if (oldScript.src) {
-              newScript.src = oldScript.src;
-            } else {
-              newScript.textContent = oldScript.textContent;
-            }
-
-            oldScript.replaceWith(newScript);
-          });
-
-          loadComponents(container);
-          if (!document.querySelector('[data-component-src]')) {
-            scheduleHidePreloader(true);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
         });
-    });
+
+        // Re-execute scripts
+        const scripts = container.querySelectorAll("script");
+        scripts.forEach((oldScript) => {
+          const newScript = document.createElement("script");
+
+          Array.from(oldScript.attributes).forEach((attr) => {
+            newScript.setAttribute(attr.name, attr.value);
+          });
+
+          if (oldScript.src) {
+            newScript.src = oldScript.src;
+          } else {
+            newScript.textContent = oldScript.textContent;
+          }
+
+          oldScript.replaceWith(newScript);
+        });
+
+        // Recursively load nested components
+        await loadComponents(container);
+
+        // Reinitialize Alpine.js for dynamically loaded content
+        if (window.Alpine) {
+          try {
+            window.Alpine.initTree(container);
+          } catch (e) {
+            console.warn("Alpine initTree failed:", e);
+          }
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // Hide preloader when all components are loaded
+    if (!document.querySelector('[data-component-src]')) {
+      scheduleHidePreloader(true);
+    }
   };
 
   loadComponents();
+  
   if (isPreloaderDisabled()) {
     hidePreloader(true);
   }

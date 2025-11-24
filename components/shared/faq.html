@@ -1,123 +1,112 @@
 <section class="py-12 lg:py-24">
+  <style>
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    .faq-icon.rotate-45 {
+      transform: rotate(45deg);
+    }
+  </style>
   <div class="container mx-auto px-4">
     <div class="text-center mb-20">
       <h1 class="font-heading text-6xl mb-6">FAQ</h1>
       <p class="text-gray-700">Here you will find the answers to the frequently asked questions.</p>
     </div>
     <div class="max-w-4xl mx-auto">
-      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-        <div>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ open: false }" @click="open = !open">
+        <div class="flex-1">
           <div class="pr-5">
             <h5 class="text-lg font-medium">What is Listening Community?</h5>
           </div>
-          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+          <div class="overflow-hidden transition-all duration-500" :style="open ? 'max-height: 500px' : 'max-height: 0'">
             <p class="text-gray-700 mt-4">Listening Community (LC) is a non-profit network of trained listeners, mental health advocates, and community partners dedicated to creating safe spaces where every person feels heard, valued, and supported.</p>
           </div>
         </div>
-        <span class="flex-shrink-0">
-          <div :class="{'hidden': accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
-          <div class="hidden" :class="{'hidden': !accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
+        <span class="flex-shrink-0 ml-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="faq-icon" :class="open ? 'rotate-45' : ''">
+            <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </span>
       </button>
-      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-        <div>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ open: false }" @click="open = !open">
+        <div class="flex-1">
           <div class="pr-5">
             <h5 class="text-lg font-medium">How does the Listening Helpline support callers?</h5>
           </div>
-          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+          <div class="overflow-hidden transition-all duration-500" :style="open ? 'max-height: 500px' : 'max-height: 0'">
             <p class="text-gray-700 mt-4">Our helpline connects callers with compassionate volunteers who offer non-judgmental listening, emotional validation, and crisis support. When needed, we guide individuals toward professional resources and follow-up care.</p>
           </div>
         </div>
-        <span class="flex-shrink-0">
-          <div :class="{'hidden': accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
-          <div class="hidden" :class="{'hidden': !accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
+        <span class="flex-shrink-0 ml-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="faq-icon" :class="open ? 'rotate-45' : ''">
+            <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </span>
       </button>
-      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-        <div>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ open: false }" @click="open = !open">
+        <div class="flex-1">
           <div class="pr-5">
             <h5 class="text-lg font-medium">Who can join a Listening Circle?</h5>
           </div>
-          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+          <div class="overflow-hidden transition-all duration-500" :style="open ? 'max-height: 500px' : 'max-height: 0'">
             <p class="text-gray-700 mt-4">Listening Circles are open to anyone seeking connection, reflection, or mutual support. Guided facilitators ensure the circles are inclusive, confidential, and grounded in empathy for participants from all backgrounds.</p>
           </div>
         </div>
-        <span class="flex-shrink-0">
-          <div :class="{'hidden': accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
-          <div class="hidden" :class="{'hidden': !accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
+        <span class="flex-shrink-0 ml-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="faq-icon" :class="open ? 'rotate-45' : ''">
+            <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </span>
       </button>
-      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-        <div>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ open: false }" @click="open = !open">
+        <div class="flex-1">
           <div class="pr-5">
             <h5 class="text-lg font-medium">How can I become a volunteer listener?</h5>
           </div>
-          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+          <div class="overflow-hidden transition-all duration-500" :style="open ? 'max-height: 500px' : 'max-height: 0'">
             <p class="text-gray-700 mt-4">Start by completing our Listening Skills Training, which covers active listening, crisis response, and self-care. After training, volunteers join supervised practice sessions before supporting callers or circles.</p>
           </div>
         </div>
-        <span class="flex-shrink-0">
-          <div :class="{'hidden': accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
-          <div class="hidden" :class="{'hidden': !accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
+        <span class="flex-shrink-0 ml-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="faq-icon" :class="open ? 'rotate-45' : ''">
+            <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </span>
       </button>
-      <button class="flex w-full py-6 px-8 mb-24 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-        <div>
+      <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ open: false }" @click="open = !open">
+        <div class="flex-1">
           <div class="pr-5">
             <h5 class="text-lg font-medium">How can organisations collaborate with LC?</h5>
           </div>
-          <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
+          <div class="overflow-hidden transition-all duration-500" :style="open ? 'max-height: 500px' : 'max-height: 0'">
             <p class="text-gray-700 mt-4">We partner with schools, colleges, workplaces, and community groups to host awareness talks, set up Listening Clubs, and deliver customised workshops. Reach out to explore programmes tailored to your community.</p>
           </div>
         </div>
-        <span class="flex-shrink-0">
-          <div :class="{'hidden': accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
+        <span class="flex-shrink-0 ml-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="faq-icon" :class="open ? 'rotate-45' : ''">
+            <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+      </button>
+      <button class="flex w-full py-6 px-8 mb-24 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ open: false }" @click="open = !open">
+        <div class="flex-1">
+          <div class="pr-5">
+            <h5 class="text-lg font-medium">Is the helpline confidential and available 24/7?</h5>
           </div>
-          <div class="hidden" :class="{'hidden': !accordion}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
+          <div class="overflow-hidden transition-all duration-500" :style="open ? 'max-height: 500px' : 'max-height: 0'">
+            <p class="text-gray-700 mt-4">Yes, all conversations with our helpline are completely confidential. Our trained volunteers are available around the clock to provide compassionate support whenever you need someone to listen.</p>
           </div>
+        </div>
+        <span class="flex-shrink-0 ml-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="faq-icon" :class="open ? 'rotate-45' : ''">
+            <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </span>
       </button>
     </div>
