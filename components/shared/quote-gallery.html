@@ -1,5 +1,66 @@
-<section class="py-12 lg:py-24 overflow-hidden">
+<section class="py-12 lg:py-24 overflow-hidden" x-data="{ 
+  lightboxOpen: false, 
+  activeImage: '', 
+  activeAlt: '',
+  openLightbox(src, alt) {
+    // Mobile/Tablet (< 1024px): Use Custom Lightbox
+    if (window.innerWidth < 1024) {
+      this.activeImage = src;
+      this.activeAlt = alt;
+      this.lightboxOpen = true;
+      document.body.style.overflow = 'hidden';
+    } else {
+      // PC (>= 1024px): Use PhotoSwipe
+      if (window.PhotoSwipeLightbox) {
+        const lightbox = new PhotoSwipeLightbox({
+          gallery: '.quote-gallery-track',
+          children: 'a', // We need to wrap images in links or change this selector
+          // Since we don't have links, we'll construct the data manually
+          pswpModule: PhotoSwipe 
+        });
+        
+        // Manual open for single image
+        const pswp = new PhotoSwipe({
+          dataSource: [{
+            src: src,
+            width: 800, // We might need actual dimensions, but let's try auto or fixed
+            height: 600,
+            alt: alt
+          }],
+          index: 0
+        });
+        pswp.init();
+      }
+    }
+  },
+  closeLightbox() {
+    this.lightboxOpen = false;
+    document.body.style.overflow = '';
+    this.activeImage = '';
+  }
+}" @keydown.escape.window="closeLightbox()">
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.3/dist/photoswipe.css">
+  <script src="https://unpkg.com/photoswipe@5.4.3/dist/umd/photoswipe.umd.min.js"></script>
+  <script src="https://unpkg.com/photoswipe@5.4.3/dist/umd/photoswipe-lightbox.umd.min.js"></script>
   <style>
+    /* ... existing styles ... */
+    
+    /* PC-only Hover Effect */
+    @media (min-width: 1024px) {
+      .quote-gallery-item {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      
+      .quote-gallery-item:hover {
+        transform: scale(1.15) rotate(1deg);
+        z-index: 10;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      
+      .quote-gallery-item:hover .quote-gallery-image {
+        filter: grayscale(0%);
+      }
+    }
     .quote-gallery-marquee {
       position: relative;
       overflow-x: auto;
@@ -34,6 +95,7 @@
       border-radius: 1.25rem;
       overflow: hidden;
       transition: transform 0.4s ease;
+      cursor: pointer;
     }
 
     .quote-gallery-image {
@@ -77,7 +139,6 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
-      cursor: pointer;
     }
 
     .lightbox-modal.active {
@@ -134,47 +195,44 @@
       transform: scale(1.1);
       background: rgba(255, 255, 255, 1);
     }
-
-    .quote-gallery-item {
-      cursor: pointer;
-    }</style>
+  </style>
   <div class="container mx-auto px-4">
     <div class="quote-gallery-marquee" data-quote-gallery>
       <div class="quote-gallery-track">
-        <div class="quote-gallery-item" tabindex="0">
+        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/images (1).webp', 'Smiling volunteers offering support')">
           <img class="quote-gallery-image" src="images/Photos/images (1).webp" alt="Smiling volunteers offering support"/>
         </div>
-        <div class="quote-gallery-item" tabindex="0">
+        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/images (2).webp', 'Community members journaling together')">
           <img class="quote-gallery-image" src="images/Photos/images (2).webp" alt="Community members journaling together"/>
         </div>
-        <div class="quote-gallery-item" tabindex="0">
+        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/images (3).webp', 'Circle of friends sharing stories')">
           <img class="quote-gallery-image" src="images/Photos/images (3).webp" alt="Circle of friends sharing stories"/>
         </div>
-        <div class="quote-gallery-item" tabindex="0">
+        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/images (4).webp', 'Mentor encouraging participant')">
           <img class="quote-gallery-image" src="images/Photos/images (4).webp" alt="Mentor encouraging participant"/>
         </div>
-        <div class="quote-gallery-item" tabindex="0">
+        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/images (1).webp', 'Smiling volunteers offering support')">
           <img class="quote-gallery-image" src="images/Photos/images (1).webp" alt="Smiling volunteers offering support"/>
         </div>
-        <div class="quote-gallery-item" tabindex="0">
+        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/images (2).webp', 'Community members journaling together')">
           <img class="quote-gallery-image" src="images/Photos/images (2).webp" alt="Community members journaling together"/>
         </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true">
+        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/images (3).webp', '')">
           <img class="quote-gallery-image" src="images/Photos/images (3).webp" alt=""/>
         </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true">
+        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/images (4).webp', '')">
           <img class="quote-gallery-image" src="images/Photos/images (4).webp" alt=""/>
         </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true">
+        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/images (1).webp', '')">
           <img class="quote-gallery-image" src="images/Photos/images (1).webp" alt=""/>
         </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true">
+        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/images (2).webp', '')">
           <img class="quote-gallery-image" src="images/Photos/images (2).webp" alt=""/>
         </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true">
+        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/images (3).webp', '')">
           <img class="quote-gallery-image" src="images/Photos/images (3).webp" alt=""/>
         </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true">
+        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/images (4).webp', '')">
           <img class="quote-gallery-image" src="images/Photos/images (4).webp" alt=""/>
         </div>
       </div>
@@ -182,25 +240,23 @@
   </div>
 
   <!-- Lightbox Modal -->
-  <div class="lightbox-modal" id="lightbox-modal">
-    <div class="lightbox-content">
-      <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
-      <img class="lightbox-image" src="" alt="" id="lightbox-image">
+  <div class="lightbox-modal" :class="{ 'active': lightboxOpen }" @click.self="closeLightbox()">
+    <div class="lightbox-content" @click.self="closeLightbox()">
+      <button class="lightbox-close" aria-label="Close lightbox" @click="closeLightbox()">&times;</button>
+      <img class="lightbox-image" :src="activeImage" :alt="activeAlt">
     </div>
   </div>
+
   <script>
     (() => {
+      // Manual Drag Logic ONLY - No Click Handling Here
       const container = document.currentScript?.parentElement?.querySelector('[data-quote-gallery]');
       if (!container) return;
-
-      const track = container.querySelector('.quote-gallery-track');
-      if (!track) return;
 
       let isDown = false;
       let startX = 0;
       let scrollLeft = 0;
 
-      // Manual Drag Logic
       container.addEventListener('pointerdown', (e) => {
         isDown = true;
         container.classList.add('is-dragging');
@@ -226,83 +282,8 @@
         if (!isDown) return;
         e.preventDefault();
         const x = e.clientX;
-        const walk = (x - startX) * 1.5; // Scroll-fast
+        const walk = (x - startX) * 1.5;
         container.scrollLeft = scrollLeft - walk;
-      });
-
-      // Lightbox functionality
-      const lightboxModal = document.getElementById('lightbox-modal');
-      const lightboxImage = document.getElementById('lightbox-image');
-      const lightboxClose = lightboxModal?.querySelector('.lightbox-close');
-      const galleryItems = container.querySelectorAll('.quote-gallery-item');
-
-      const openLightbox = (imageSrc, imageAlt) => {
-        if (!lightboxModal || !lightboxImage) return;
-        lightboxImage.src = imageSrc;
-        lightboxImage.alt = imageAlt;
-        lightboxModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      };
-
-      const closeLightbox = () => {
-        if (!lightboxModal) return;
-        lightboxModal.classList.remove('active');
-        document.body.style.overflow = '';
-      };
-
-      // Simple Click Handler - No complex drag detection
-      // We rely on the fact that a significant drag usually doesn't trigger a clean 'click' event 
-      // or we just accept that dragging might open it if you release exactly on the item.
-      // But for now, priority is to MAKE IT OPEN on PC.
-      galleryItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-          // Prevent default to avoid any weird behavior
-          // e.preventDefault(); 
-          
-          // Check if we are currently dragging (isDown is true)
-          // If isDown is true, it means we haven't released yet? 
-          // No, click fires after pointerup.
-          
-          const img = item.querySelector('.quote-gallery-image');
-          if (img) {
-            openLightbox(img.src, img.alt);
-          }
-        });
-
-        // Keyboard accessibility
-        item.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            const img = item.querySelector('.quote-gallery-image');
-            if (img) {
-              openLightbox(img.src, img.alt);
-            }
-          }
-        });
-      });
-
-      // Close button
-      if (lightboxClose) {
-        lightboxClose.addEventListener('click', (e) => {
-          e.stopPropagation();
-          closeLightbox();
-        });
-      }
-
-      // Click anywhere on modal to close
-      if (lightboxModal) {
-        lightboxModal.addEventListener('click', (e) => {
-          if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
-            closeLightbox();
-          }
-        });
-      }
-
-      // ESC key to close
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightboxModal?.classList.contains('active')) {
-          closeLightbox();
-        }
       });
     })();
   </script>
