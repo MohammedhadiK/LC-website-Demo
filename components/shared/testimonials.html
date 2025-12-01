@@ -1,25 +1,54 @@
-<section class="pt-2 lg:pt-4 pb-12 lg:pb-24 overflow-hidden" x-data="{ activeSlide: 1, slideCount: 4 }">
+<section
+  class="pt-2 lg:pt-4 pb-12 lg:pb-24 overflow-hidden"
+  x-data="() => ({
+    activeSlide: 1,
+    images: [
+      {
+        src: 'images/testimonials face - Google Search/sreehari-helpline-caller.jpg',
+        alt: 'Portrait of Sreehari'
+      },
+      {
+        src: 'images/testimonials face - Google Search/adrika-volunteer-listener.jpeg',
+        alt: 'Portrait of Adrika'
+      },
+      {
+        src: 'images/testimonials face - Google Search/munna-c-hod-kmo-college-calicut.jpeg',
+        alt: 'Portrait of Munna C'
+      }
+    ],
+    get slideCount() {
+      return this.images.length;
+    }
+  })"
+>
   <div class="container mx-auto px-4">
     <div class="flex flex-wrap items-center -mx-4">
       <div class="w-full md:w-1/2 px-4 mb-12 md:mb-0">
         <div class="max-w-lg mx-auto md:mx-0 overflow-hidden">
-          <div class="flex -mx-4 transition-transform duration-500" :style="'transform: translateX(-' + (activeSlide - 1) * 100 + '%)'"><img class="block flex-shrink-0 w-full px-4" src="images/testimonials%20face%20-%20Google%20Search/image%20(1).jpg" alt="Portrait of Aisha Menon"/><img class="block flex-shrink-0 w-full px-4" src="images/testimonials%20face%20-%20Google%20Search/image%20(2).jpg" alt="Portrait of Ravi Thomas"/><img class="block flex-shrink-0 w-full px-4" src="images/testimonials%20face%20-%20Google%20Search/image%20(3).jpg" alt="Portrait of Dr. Meera Kapoor"/><img class="block flex-shrink-0 w-full px-4" src="images/testimonials%20face%20-%20Google%20Search/image%20(4).jpg" alt="Portrait of Sonia Patel"/></div>
+          <div class="relative min-h-[420px]">
+            <template x-for="(image, index) in images" :key="image.src">
+              <img
+                class="absolute inset-0 block w-full px-4"
+                :src="image.src"
+                :alt="image.alt"
+                x-show="activeSlide === index + 1"
+                x-transition.opacity.300ms
+              />
+            </template>
+          </div>
         </div>
       </div>
       <div class="w-full md:w-1/2 px-4">
         <div class="max-w-lg mx-auto md:mr-0 overflow-hidden testimonial-wrapper">
           <div class="flex -mx-4 transition-transform duration-500 testimonial-cards" :style="'transform: translateX(-' + (activeSlide - 1) * 100 + '%)'">
             <div class="flex-shrink-0 px-4 w-full testimonial-card">
-              <h4 class="text-3xl lg:text-4xl font-medium mb-10">“The Listening Helpline held space for me on the hardest night of my life. Hearing a calm, caring voice reminded me I wasn’t alone.”</h4><span class="block text-xl font-medium">Aisha Menon</span><span class="block mb-12 lg:mb-32 text-lg text-gray-700">Helpline Caller</span>
+              <h4 class="text-3xl lg:text-4xl font-medium mb-10">“The Listening Helpline held space for me on the hardest night of my life. Hearing a calm, caring voice reminded me I wasn’t alone.”</h4><span class="block text-xl font-medium">Sreehari (Name Changed)</span><span class="block mb-12 lg:mb-32 text-lg text-gray-700">Helpline Caller</span>
             </div>
             <div class="flex-shrink-0 px-4 w-full testimonial-card">
-              <h4 class="text-3xl lg:text-4xl font-medium mb-10">“Facilitating Listening Circles has reshaped how I show up for others. The training taught me to listen with empathy instead of fixing.”</h4><span class="block text-xl font-medium">Ravi Thomas</span><span class="block mb-12 lg:mb-32 text-lg text-gray-700">Volunteer Listener</span>
+              <h4 class="text-3xl lg:text-4xl font-medium mb-10">“Facilitating Listening Circles has reshaped how I show up for others. The training taught me to listen with empathy instead of fixing.”</h4><span class="block text-xl font-medium">Adrika</span><span class="block mb-12 lg:mb-32 text-lg text-gray-700">Volunteer Listener</span>
             </div>
             <div class="flex-shrink-0 px-4 w-full testimonial-card">
-              <h4 class="text-3xl lg:text-4xl font-medium mb-10">“Partnering with LC brought a culture of care into our campus. Students feel safe seeking support and referring friends.”</h4><span class="block text-xl font-medium">Dr. Meera Kapoor</span><span class="block mb-12 lg:mb-32 text-lg text-gray-700">Dean, Horizon College</span>
-            </div>
-            <div class="flex-shrink-0 px-4 w-full testimonial-card">
-              <h4 class="text-3xl lg:text-4xl font-medium mb-10">“The awareness workshops helped our employees recognise signs of burnout early and lean on each other for support.”</h4><span class="block text-xl font-medium">Sonia Patel</span><span class="block mb-12 lg:mb-32 text-lg text-gray-700">HR Director, Northwind Labs</span>
+              <h4 class="text-3xl lg:text-4xl font-medium mb-10">“Partnering with LC brought a culture of care into our campus. Students feel safe seeking support and referring friends.”</h4><span class="block text-xl font-medium">Munna C</span><span class="block mb-12 lg:mb-32 text-lg text-gray-700">HOD, KMO College Calicut</span>
             </div>
           </div>
           <div>
