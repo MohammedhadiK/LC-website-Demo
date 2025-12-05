@@ -3,45 +3,18 @@
   activeImage: '', 
   activeAlt: '',
   openLightbox(src, alt) {
-    // Mobile/Tablet (< 1024px): Use Custom Lightbox
-    if (window.innerWidth < 1024) {
-      this.activeImage = src;
-      this.activeAlt = alt;
-      this.lightboxOpen = true;
-      document.body.style.overflow = 'hidden';
-    } else {
-      // PC (>= 1024px): Use PhotoSwipe
-      if (window.PhotoSwipeLightbox) {
-        const lightbox = new PhotoSwipeLightbox({
-          gallery: '.quote-gallery-track',
-          children: 'a', // We need to wrap images in links or change this selector
-          // Since we don't have links, we'll construct the data manually
-          pswpModule: PhotoSwipe 
-        });
-        
-        // Manual open for single image
-        const pswp = new PhotoSwipe({
-          dataSource: [{
-            src: src,
-            width: 800, // We might need actual dimensions, but let's try auto or fixed
-            height: 600,
-            alt: alt
-          }],
-          index: 0
-        });
-        pswp.init();
-      }
-    }
+    this.activeImage = src;
+    this.activeAlt = alt || '';
+    this.lightboxOpen = true;
+    document.body.style.overflow = 'hidden';
   },
   closeLightbox() {
     this.lightboxOpen = false;
     document.body.style.overflow = '';
     this.activeImage = '';
+    this.activeAlt = '';
   }
 }" @keydown.escape.window="closeLightbox()">
-  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.3/dist/photoswipe.css">
-  <script src="https://unpkg.com/photoswipe@5.4.3/dist/umd/photoswipe.umd.min.js"></script>
-  <script src="https://unpkg.com/photoswipe@5.4.3/dist/umd/photoswipe-lightbox.umd.min.js"></script>
   <style>
     /* ... existing styles ... */
     
@@ -249,16 +222,19 @@
 
   <script>
     (() => {
-      // Manual Drag Logic ONLY - No Click Handling Here
+      // Manual Drag Logic with Click Protection
       const container = document.currentScript?.parentElement?.querySelector('[data-quote-gallery]');
       if (!container) return;
 
       let isDown = false;
       let startX = 0;
       let scrollLeft = 0;
+      let wasDragged = false;
+      const DRAG_THRESHOLD = 5; // Minimum pixels to consider it a drag
 
       container.addEventListener('pointerdown', (e) => {
         isDown = true;
+        wasDragged = false;
         container.classList.add('is-dragging');
         container.setPointerCapture(e.pointerId);
         startX = e.clientX;
@@ -280,11 +256,26 @@
 
       container.addEventListener('pointermove', (e) => {
         if (!isDown) return;
-        e.preventDefault();
         const x = e.clientX;
-        const walk = (x - startX) * 1.5;
-        container.scrollLeft = scrollLeft - walk;
+        const distance = Math.abs(x - startX);
+        
+        // Only start dragging if moved beyond threshold
+        if (distance > DRAG_THRESHOLD) {
+          wasDragged = true;
+          e.preventDefault();
+          const walk = (x - startX) * 1.5;
+          container.scrollLeft = scrollLeft - walk;
+        }
       });
+
+      // Prevent click events on gallery items if user was dragging
+      container.addEventListener('click', (e) => {
+        if (wasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          wasDragged = false;
+        }
+      }, true);
     })();
   </script>
 </section>
