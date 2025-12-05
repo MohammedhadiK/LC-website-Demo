@@ -79,11 +79,14 @@
           >
             <span class="mr-2 flex items-center" data-label>Submit</span>
             <svg
-              class="mr-2 h-5 w-5 animate-spin text-white hidden"
+              class="mr-2 text-white contact-spinner"
               data-loader
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              style="display: none"
             >
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path
@@ -99,6 +102,7 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               data-icon
+              style="display: inline"
             >
               <path
                 d="M5.25 10H15.75"
@@ -181,8 +185,8 @@
         submitBtn.classList.toggle('pointer-events-none', isLoading);
         submitBtn.classList.toggle('opacity-60', isLoading);
         label.textContent = isLoading ? 'Sending...' : 'Submit';
-        loader.classList.toggle('hidden', !isLoading);
-        icon.classList.toggle('hidden', isLoading);
+        loader.style.display = isLoading ? 'inline-block' : 'none';
+        icon.style.display = isLoading ? 'none' : 'inline-block';
       }
 
       function setStatus(message, hide, isSuccess) {
@@ -224,3 +228,18 @@
     }
   })();
 </script>
+
+<style>
+  .contact-spinner {
+    animation: contact-spin 1s linear infinite;
+  }
+
+  @keyframes contact-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
