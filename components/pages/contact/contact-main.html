@@ -13,7 +13,11 @@
         </p>
       </div>
       <div class="p-8 bg-white rounded-2xl shadow-md">
-        <form action="#!" method="post">
+        <form
+          id="contactForm"
+          action="https://script.google.com/macros/s/AKfycbwTiWDeHq4khQo2kwf6lX5X9a2GyF_d1yc8rzvJLWTBlk-7cB36Khm9puez1bkwK4kHzQ/exec"
+          method="post"
+        >
           <label class="block pl-4 mb-1 text-sm font-medium" for="contact-name">Full Name</label>
           <input
             id="contact-name"
@@ -75,15 +79,30 @@
 
           <button
             type="submit"
-            class="flex w-full py-3 px-5 items-center justify-center font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200"
+            class="flex w-full py-3 px-5 items-center justify-center font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200 disabled:opacity-60"
           >
-            <span class="mr-2">Submit</span>
+            <span class="mr-2 flex items-center" data-label>Submit</span>
+            <svg
+              class="mr-2 h-5 w-5 animate-spin text-white hidden"
+              data-loader
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
             <svg
               width="21"
               height="20"
               viewBox="0 0 21 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              data-icon
             >
               <path
                 d="M5.25 10H15.75"
@@ -101,8 +120,105 @@
               ></path>
             </svg>
           </button>
+          <p
+            id="contactStatus"
+            class="mt-4 text-center text-sm font-medium text-green-600 hidden"
+            aria-live="polite"
+          ></p>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    function initContactForm() {
+      var form = document.getElementById('contactForm');
+      if (!form) return;
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (!submitBtn) return;
+
+      var label = submitBtn.querySelector('[data-label]');
+      var loader = submitBtn.querySelector('[data-loader]');
+      var icon = submitBtn.querySelector('[data-icon]');
+      var statusEl = document.getElementById('contactStatus');
+      var endpoint = form.dataset.endpoint || form.action;
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleLoading(true);
+        setStatus('', true);
+
+        fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json'
+          },
+          body: new FormData(form)
+        })
+          .then(parseResponse)
+          .then(function (result) {
+            if (result.status === 'success') {
+              form.reset();
+              setStatus('Message sent successfully.', false, true);
+            } else {
+              throw new Error(result.message || 'Unable to send message.');
+            }
+          })
+          .catch(function (error) {
+            setStatus(error.message || 'Something went wrong. Please try again.', false, false);
+          })
+          .finally(function () {
+            toggleLoading(false);
+          });
+      });
+
+      function toggleLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        label.textContent = isLoading ? 'Sending...' : 'Submit';
+        loader.classList.toggle('hidden', !isLoading);
+        icon.classList.toggle('hidden', isLoading);
+      }
+
+      function setStatus(message, hide, isSuccess) {
+        if (hide || !message) {
+          statusEl.classList.add('hidden');
+          statusEl.textContent = '';
+          return;
+        }
+        statusEl.textContent = message;
+        statusEl.classList.remove('hidden');
+        statusEl.classList.toggle('text-green-600', !!isSuccess);
+        statusEl.classList.toggle('text-red-600', !isSuccess);
+      }
+
+      function parseResponse(response) {
+        var contentType = response.headers.get('Content-Type') || '';
+        if (contentType.indexOf('application/json') !== -1) {
+          return response.json();
+        }
+        return response
+          .text()
+          .then(function (text) {
+            if (!text) {
+              return {};
+            }
+            try {
+              return JSON.parse(text);
+            } catch (err) {
+              throw new Error(text.trim() || 'Unexpected response');
+            }
+          });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initContactForm);
+    } else {
+      initContactForm();
+    }
+  })();
+</script>
