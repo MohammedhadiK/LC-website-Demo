@@ -174,45 +174,102 @@
       transform: scale(1.1) rotate(90deg);
       background: #034731;
     }
+    /* Navigation Buttons */
+    .gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      color: #022C22;
+      transition: all 0.2s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .gallery-container:hover .gallery-nav-btn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .gallery-nav-btn:hover {
+      background: #f3f4f6;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .gallery-nav-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .gallery-nav-prev { left: 10px; }
+    .gallery-nav-next { right: 10px; }
+
+    /* Hide nav buttons on touch devices */
+    @media (hover: none) {
+      .gallery-nav-btn { display: none; }
+    }
+
+    .gallery-container {
+      position: relative;
+    }
   </style>
   <div class="container mx-auto px-4">
-    <div class="quote-gallery-marquee" data-quote-gallery>
-      <div class="quote-gallery-track">
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (1).webp', 'Volunteers sharing warmth in a listening circle')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (1).webp" alt="Volunteers sharing warmth in a listening circle"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (2).webp', 'Smiles and connection in community space')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (2).webp" alt="Smiles and connection in community space"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (3).webp', 'Participants reflecting together')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (3).webp" alt="Participants reflecting together"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (4).webp', 'Facilitator guiding a safe dialogue')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (4).webp" alt="Facilitator guiding a safe dialogue"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (5).webp', 'Listening circle embracing vulnerability')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (5).webp" alt="Listening circle embracing vulnerability"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (6).webp', 'Gentle attention during a sharing moment')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (6).webp" alt="Gentle attention during a sharing moment"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (7).webp', 'Outdoor support among friends')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (7).webp" alt="Outdoor support among friends"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (8).webp', 'Community laughter and lightness')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (8).webp" alt="Community laughter and lightness"/>
-        </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (9).webp', '')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (9).webp" alt=""/>
-        </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (10).webp', '')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (10).webp" alt=""/>
-        </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (11).webp', '')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (11).webp" alt=""/>
-        </div>
-        <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (12).webp', '')">
-          <img class="quote-gallery-image" src="images/Photos/gallery-image (12).webp" alt=""/>
+    <div class="gallery-container">
+      <button class="gallery-nav-btn gallery-nav-prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      
+      <button class="gallery-nav-btn gallery-nav-next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <div class="quote-gallery-marquee" data-quote-gallery>
+        <div class="quote-gallery-track">
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (1).webp', 'Volunteers sharing warmth in a listening circle')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (1).webp" alt="Volunteers sharing warmth in a listening circle"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (2).webp', 'Smiles and connection in community space')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (2).webp" alt="Smiles and connection in community space"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (3).webp', 'Participants reflecting together')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (3).webp" alt="Participants reflecting together"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (4).webp', 'Facilitator guiding a safe dialogue')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (4).webp" alt="Facilitator guiding a safe dialogue"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (5).webp', 'Listening circle embracing vulnerability')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (5).webp" alt="Listening circle embracing vulnerability"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (6).webp', 'Gentle attention during a sharing moment')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (6).webp" alt="Gentle attention during a sharing moment"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (7).webp', 'Outdoor support among friends')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (7).webp" alt="Outdoor support among friends"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="0" @click="openLightbox('images/Photos/gallery-image (8).webp', 'Community laughter and lightness')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (8).webp" alt="Community laughter and lightness"/>
+          </div>
+          <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (9).webp', '')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (9).webp" alt=""/>
+          </div>
+          <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (10).webp', '')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (10).webp" alt=""/>
+          </div>
+          <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (11).webp', '')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (11).webp" alt=""/>
+          </div>
+          <div class="quote-gallery-item" tabindex="-1" aria-hidden="true" @click="openLightbox('images/Photos/gallery-image (12).webp', '')">
+            <img class="quote-gallery-image" src="images/Photos/gallery-image (12).webp" alt=""/>
+          </div>
         </div>
       </div>
     </div>
@@ -228,60 +285,25 @@
 
   <script>
     (() => {
-      // Manual Drag Logic with Click Protection
+      // Simple Navigation Logic
       const container = document.currentScript?.parentElement?.querySelector('[data-quote-gallery]');
-      if (!container) return;
+      const wrapper = container?.closest('.gallery-container');
+      if (!container || !wrapper) return;
 
-      let isDown = false;
-      let startX = 0;
-      let scrollLeft = 0;
-      let wasDragged = false;
-      const DRAG_THRESHOLD = 5; // Minimum pixels to consider it a drag
+      const prevBtn = wrapper.querySelector('.gallery-nav-prev');
+      const nextBtn = wrapper.querySelector('.gallery-nav-next');
+      const SCROLL_AMOUNT = 300;
 
-      container.addEventListener('pointerdown', (e) => {
-        isDown = true;
-        wasDragged = false;
-        container.classList.add('is-dragging');
-        container.setPointerCapture(e.pointerId);
-        startX = e.clientX;
-        scrollLeft = container.scrollLeft;
+      // Enable smooth scrolling
+      container.style.scrollBehavior = 'smooth';
+
+      prevBtn?.addEventListener('click', () => {
+        container.scrollLeft -= SCROLL_AMOUNT;
       });
 
-      container.addEventListener('pointerleave', () => {
-        isDown = false;
-        container.classList.remove('is-dragging');
+      nextBtn?.addEventListener('click', () => {
+        container.scrollLeft += SCROLL_AMOUNT;
       });
-
-      container.addEventListener('pointerup', (e) => {
-        isDown = false;
-        container.classList.remove('is-dragging');
-        if (container.hasPointerCapture(e.pointerId)) {
-          container.releasePointerCapture(e.pointerId);
-        }
-      });
-
-      container.addEventListener('pointermove', (e) => {
-        if (!isDown) return;
-        const x = e.clientX;
-        const distance = Math.abs(x - startX);
-        
-        // Only start dragging if moved beyond threshold
-        if (distance > DRAG_THRESHOLD) {
-          wasDragged = true;
-          e.preventDefault();
-          const walk = (x - startX) * 1.5;
-          container.scrollLeft = scrollLeft - walk;
-        }
-      });
-
-      // Prevent click events on gallery items if user was dragging
-      container.addEventListener('click', (e) => {
-        if (wasDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-          wasDragged = false;
-        }
-      }, true);
     })();
   </script>
 </section>
