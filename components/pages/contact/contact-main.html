@@ -141,10 +141,12 @@
       var icon = submitBtn.querySelector('[data-icon]');
       var statusEl = document.getElementById('contactStatus');
       var endpoint = form.dataset.endpoint || form.action;
+      var isSubmitting = false;
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         event.stopPropagation();
+        if (isSubmitting) return;
         toggleLoading(true);
         setStatus('', true);
 
@@ -173,7 +175,11 @@
       });
 
       function toggleLoading(isLoading) {
-        submitBtn.disabled = isLoading;
+        isSubmitting = isLoading;
+        submitBtn.setAttribute('aria-busy', isLoading ? 'true' : 'false');
+        submitBtn.setAttribute('aria-disabled', isLoading ? 'true' : 'false');
+        submitBtn.classList.toggle('pointer-events-none', isLoading);
+        submitBtn.classList.toggle('opacity-60', isLoading);
         label.textContent = isLoading ? 'Sending...' : 'Submit';
         loader.classList.toggle('hidden', !isLoading);
         icon.classList.toggle('hidden', isLoading);
